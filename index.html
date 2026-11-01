@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cổng thông tin Tư vấn học đường – THPT Mộ Đức</title>
+<meta name="theme-color" content="#0e7c66">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Chạm">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f8f6;--card:#fff;--tx:#17302a;--mu:#5b716a;--pr:#0e7c66;--pr2:#e3f3ee;--bd:#d5e3de;--dg:#c0392b;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a17;--card:#17261f;--tx:#e6f1ed;--mu:#9bb3aa;--pr:#3fc3a4;--pr2:#1c3a31;--bd:#2a4338;--dg:#ff7b6b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1a17;--card:#17261f;--tx:#e6f1ed;--mu:#9bb3aa;--pr:#3fc3a4;--pr2:#1c3a31;--bd:#2a4338;--dg:#ff7b6b;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:var(--pr);color:#fff;padding:14px 16px}header h1{margin:0;font-size:1.05rem}header small{opacity:.85}
+nav{display:flex;gap:6px;overflow-x:auto;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+nav a{white-space:nowrap;padding:7px 12px;border-radius:20px;color:var(--tx);text-decoration:none;font-size:.88rem;border:1px solid var(--bd)}
+nav a.on{background:var(--pr);color:#fff;border-color:var(--pr)}
+main{max-width:860px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h3,.card h2{margin:0 0 6px}.mu{color:var(--mu);font-size:.9rem}
+.btn{display:inline-block;background:var(--pr);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;cursor:pointer;text-decoration:none}
+.btn.g{background:var(--pr2);color:var(--pr)}.btn.d{background:var(--dg)}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hero a{padding:18px 10px;text-align:center;font-weight:600}
+input,select,textarea{width:100%;padding:10px;margin:4px 0 10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+.post{border-top:1px solid var(--bd);padding-top:10px;margin-top:10px}.post p{white-space:pre-wrap;margin:4px 0}
+.tag{background:var(--pr2);color:var(--pr);border-radius:8px;padding:2px 8px;font-size:.78rem}
+.opt{display:flex;gap:4px;flex-wrap:wrap}.opt label{flex:1;min-width:60px;text-align:center;border:1px solid var(--bd);border-radius:8px;padding:6px;font-size:.82rem;cursor:pointer}
+.opt input{width:auto;margin:0 4px 0 0}
+.ok{background:var(--pr2);color:var(--pr);padding:10px;border-radius:10px;margin-top:8px}
+@media(max-width:520px){.hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>🌿 Cổng thông tin Giáo dục kỹ năng &amp; Tư vấn học đường</h1><small>Trường THPT Mộ Đức · Hệ sinh thái “Chạm”</small></header>
+<nav id="nav"></nav>
+<main id="app"></main>
+<script src="config.js"></script>
+<script>
+var M=[['home','Trang chủ'],['m2','Giới thiệu'],['m3','Phòng, chống bạo lực'],['m4','Kỹ năng sống'],['m5','Học tập & Hướng nghiệp'],['m6','Phòng Tư vấn'],['m7','Nhà trường – Gia đình']];
+var SEC=[
+['tb','home','Thông báo từ Ban Giám hiệu / Đoàn trường','Kế hoạch, hoạt động giáo dục đạo đức, sinh hoạt chuyên đề theo tuần/tháng.'],
+['2.1','m2','Cơ cấu Tổ Tư vấn Học đường','Danh sách, chuyên môn và lịch trực của thầy cô Ban Tư vấn tâm lý cùng đội ngũ học sinh nòng cốt.'],
+['2.2','m2','Bộ Quy tắc Ứng xử Văn hóa Học đường','Quy định về nề nếp, tôn trọng thầy cô, đoàn kết bạn bè và ứng xử văn minh trên không gian mạng (Netiquette).'],
+['3.1','m3','Hộp thư “Cảnh báo Xanh” – Báo cáo bạo lực ẩn danh','Học sinh (nạn nhân hoặc người chứng kiến) báo tin cho Ban Giám hiệu và Tổ Tư vấn mà không lộ danh tính.','report'],
+['3.2','m3','Nhận diện các hình thức bạo lực học đường','Bạo lực thể chất · Bạo lực lời nói (miệt thị ngoại hình) · Bạo lực quan hệ (tẩy chay, cô lập) · Bạo lực mạng (bóc phốt, chế ảnh xúc phạm).'],
+['3.3','m3','Kỹ năng ứng phó & hòa giải mâu thuẫn','Các bước tự bảo vệ khi bị bắt nạt, bị công kích trên mạng; cách tháo gỡ xích mích nhóm bạn, hiểu lầm giữa các lớp, bất đồng khi làm việc nhóm.'],
+['3.4','m3','Video tình huống phòng chống bạo lực','Tiểu phẩm tình huống do học sinh trường thể hiện (từ kênh TikTok “Chạm”).'],
+['4.1','m4','Quản lý cảm xúc & giao tiếp tích cực','Làm chủ cảm xúc, vượt qua áp lực đồng trang lứa, xây dựng tình bạn đẹp, ứng xử lễ phép với thầy cô.'],
+['4.2','m4','Chuyên đề Giáo dục giá trị sống','Lòng biết ơn, sự sẻ chia, tinh thần trách nhiệm với bản thân, gia đình và cộng đồng.'],
+['4.3','m4','Gương Người tốt – Việc tốt','Vinh danh những câu chuyện đẹp, hành động tử tế, tập thể lớp đoàn kết.'],
+['5.1','m5','Phương pháp học tập & vượt qua áp lực thi cử','Tự học hiệu quả các môn Tự nhiên và Xã hội; Pomodoro, ma trận Eisenhower, ghi chép Cornell giúp giảm lo âu trước kiểm tra.'],
+['5.2','m5','Trắc nghiệm khám phá bản thân & hướng nghiệp','Trắc nghiệm Đa trí tuệ và Holland giúp hiểu thế mạnh để chọn tổ hợp môn, ngành nghề. (Quản trị viên đăng liên kết bài trắc nghiệm tại đây.)'],
+['6.1','m6','Đặt lịch hẹn tư vấn 1-1','Đăng ký gặp trực tiếp thầy cô tại Phòng Tư vấn hoặc hẹn tư vấn trực tuyến bảo mật.','booking'],
+['6.2','m6','Hộp thư Tâm sự ẩn danh – Trạm Lắng Nghe','Gửi những trăn trở về áp lực điểm số, gia đình, tình cảm tuổi học trò để nhận lời khuyên từ Ban cố vấn.','confide'],
+['6.3','m6','Tự kiểm tra sức khỏe tinh thần (DASS-21)','Bài trắc nghiệm chuẩn hóa giúp tự sàng lọc mức Stress – Lo âu – Trầm cảm. Kết quả chỉ để tham khảo, không phải chẩn đoán.','dass'],
+['7.1','m7','Kho học liệu Sinh hoạt lớp (dành cho GVCN)','Video tình huống TikTok “Chạm”, Infographic Facebook “Trạm Chạm” và câu hỏi thảo luận theo chủ đề tháng.'],
+['7.2','m7','Cẩm nang Đồng hành cùng con (dành cho Phụ huynh)','Thấu hiểu tâm lý tuổi THPT, nhận biết sớm dấu hiệu con bị áp lực học tập hoặc bị bắt nạt.']
+];
+var DQ=['Tôi thấy khó thư giãn','Tôi bị khô miệng','Tôi không cảm nhận được cảm xúc tích cực nào','Tôi bị khó thở dù không gắng sức','Tôi thấy khó bắt tay vào làm việc','Tôi có xu hướng phản ứng thái quá','Tôi bị run tay chân','Tôi thấy mình tiêu hao nhiều năng lượng vì căng thẳng','Tôi lo lắng về các tình huống có thể khiến mình hoảng sợ hoặc xấu hổ','Tôi thấy mình không có gì để mong đợi','Tôi dễ bị kích động','Tôi thấy khó thư giãn được','Tôi thấy buồn chán, nản lòng','Tôi không chịu được việc bị cản trở','Tôi thấy mình gần như hoảng loạn','Tôi không thể hứng thú với bất cứ điều gì','Tôi thấy mình chẳng có giá trị gì','Tôi khá dễ phật ý, tự ái','Tôi nghe rõ tim đập dù không gắng sức','Tôi thấy sợ vô cớ','Tôi thấy cuộc sống vô nghĩa'];
+var DD=[3,5,10,13,16,17,21],DA=[2,4,7,9,15,19,20],DS=[1,6,8,11,12,14,18];
+
+var S={posts:[]},C=window.CFG||{};
+function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function $(s){return document.querySelector(s)}
+function route(){return (location.hash||'#home').slice(1)}
+function csv(t){var r=[],w=[],f='',q=false,i,c;for(i=0;i<t.length;i++){c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}else if(c=='"')q=true;else if(c==','){w.push(f);f=''}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;w.push(f);r.push(w);w=[];f=''}else f+=c}if(f||w.length){w.push(f);r.push(w)}return r}
+function pd(s){s=(s||'').trim();var m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m)return new Date(+m[3],m[2]-1,+m[1]).getTime();var t=Date.parse(s);return isNaN(t)?0:t}
+function parse(t){S.posts=csv(t).slice(1).filter(function(r){return r[0]&&r[1]}).map(function(r,i){return{sec:r[0].trim(),title:r[1],body:r[2]||'',link:(r[3]||'').trim(),ts:pd(r[4]),i:i}})}
+function load(){
+ var c='';try{c=localStorage.getItem('cham_posts')||''}catch(x){}
+ if(c)parse(c);render();
+ if(!C.sheetCsv)return;
+ fetch(C.sheetCsv).then(function(r){return r.text()}).then(function(t){parse(t);try{localStorage.setItem('cham_posts',t)}catch(x){}render()}).catch(function(){})}
+function nav(){var r=route();$('#nav').innerHTML=M.map(function(m){return '<a href="#'+m[0]+'" class="'+(m[0]==r?'on':'')+'">'+m[1]+'</a>'}).join('')+(C.sheetEdit?'<a href="'+e(C.sheetEdit)+'" target="_blank" rel="noopener">🔐 Quản trị</a>':'')}
+function posts(id){var p=S.posts.filter(function(x){return x.sec==id}).sort(function(a,b){return (b.ts-a.ts)||(b.i-a.i)});return p.map(function(x){return '<div class="post"><b>'+e(x.title)+'</b>'+(x.ts?' <span class="mu">· '+new Date(x.ts).toLocaleDateString('vi-VN')+'</span>':'')+'<p>'+e(x.body)+'</p>'+(/^https?:\/\//.test(x.link)?'<a class="btn g" href="'+e(x.link)+'" target="_blank" rel="noopener">Xem liên kết ↗</a>':'')+'</div>'}).join('')}
+function tool(t){
+ if(t=='dass')return '<div id="dass">'+DQ.map(function(q,i){return '<p style="margin:10px 0 4px">'+(i+1)+'. '+q+'</p><div class="opt">'+['Không đúng','Đúng một phần','Khá đúng','Rất đúng'].map(function(o,v){return '<label><input type="radio" name="q'+i+'" value="'+v+'">'+o+'</label>'}).join('')+'</div>'}).join('')+'<p><button class="btn" id="dgo">Xem kết quả</button></p><div id="dres"></div></div>';
+ var u=(C.forms||{})[t];
+ return u?'<a class="btn" href="'+e(u)+'" target="_blank" rel="noopener">Mở biểu mẫu ↗</a><p class="mu">Biểu mẫu không yêu cầu đăng nhập.</p>':'<div class="ok">Biểu mẫu chưa được cấu hình. Vui lòng gặp trực tiếp thầy cô Tổ Tư vấn.</div>'}
+function secHTML(s){return '<div class="card"><h3>'+s[0]+' · '+e(s[2])+'</h3><div class="mu">'+e(s[3])+'</div>'+(s[4]?'<div style="margin-top:12px">'+tool(s[4])+'</div>':'')+posts(s[0])+'</div>'}
+function render(){nav();var r=route(),h='';
+ if(r=='home'){var soc=(C.facebook?'<a class="btn g" href="'+e(C.facebook)+'" target="_blank" rel="noopener">Facebook “Trạm Chạm”</a> ':'')+(C.tiktok?'<a class="btn g" href="'+e(C.tiktok)+'" target="_blank" rel="noopener">TikTok “Chạm”</a>':'');
+  h='<div class="hero"><a class="btn d" href="#m3">🚨 Báo cáo bạo lực ẩn danh</a><a class="btn" href="#m6">📅 Đặt lịch tư vấn tâm lý</a></div><div style="height:14px"></div>'+secHTML(SEC[0])+'<div class="card"><h3>📲 Cài app lên điện thoại</h3><div class="mu"><b>Android (Chrome):</b> bấm ⋮ → “Thêm vào màn hình chính” / “Cài đặt ứng dụng”.<br><b>iPhone (Safari):</b> bấm nút Chia sẻ ⬆️ → “Thêm vào MH chính”.</div><div id="inst"></div></div><div class="card"><h3>Truyền thông đa nền tảng</h3><div class="mu" style="margin-bottom:10px">Theo dõi Fanpage và kênh TikTok “Chạm”.</div>'+soc+'</div>'}
+ else h=SEC.filter(function(s){return s[1]==r}).map(secHTML).join('');
+ $('#app').innerHTML=h;
+ var g=document.getElementById('dgo');if(g)g.onclick=function(){var a=[];for(var i=0;i<21;i++){var c=document.querySelector('input[name=q'+i+']:checked');if(!c){document.getElementById('dres').innerHTML='<div class="ok">Bạn còn câu chưa trả lời (câu '+(i+1)+').</div>';return}a.push(+c.value)}
+  var sc=function(l){return l.reduce(function(s,n){return s+a[n-1]},0)*2},L=['Bình thường','Nhẹ','Vừa','Nặng','Rất nặng'],lv=function(v,t){var k=0;t.forEach(function(x,i){if(v>=x)k=i+1});return L[k]};
+  var d=sc(DD),n=sc(DA),s=sc(DS);
+  document.getElementById('dres').innerHTML='<div class="ok"><b>Trầm cảm:</b> '+d+' – '+lv(d,[10,14,21,28])+'<br><b>Lo âu:</b> '+n+' – '+lv(n,[8,10,15,20])+'<br><b>Căng thẳng:</b> '+s+' – '+lv(s,[15,19,26,34])+'<br><br>Đây chỉ là sàng lọc tham khảo, không phải chẩn đoán. Nếu mức từ “Vừa” trở lên hoặc bạn thấy khó chịu kéo dài, hãy chia sẻ với thầy cô Tổ Tư vấn hoặc người bạn tin tưởng — <a href="#m6">đặt lịch tư vấn</a>.</div>'};
+ if(ip&&route()=='home')showIb()}
+var ip=null;function showIb(){var i=document.getElementById('inst');if(i){i.innerHTML='<p><button class="btn" id="ib">Cài đặt ngay</button></p>';document.getElementById('ib').onclick=function(){ip.prompt()}}}
+window.addEventListener('beforeinstallprompt',function(ev){ev.preventDefault();ip=ev;showIb()});
+window.addEventListener('hashchange',function(){render();scrollTo(0,0)});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(function(){});
+render();load();
+</script>
+</body>
+</html>
