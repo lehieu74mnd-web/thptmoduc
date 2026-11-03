@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chạm – Tư vấn học đường THPT Mộ Đức</title>
+<meta name="theme-color" content="#3D405B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Chạm">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{box-sizing:border-box;--bg:#faf7ee;--card:#fff;--tx:#2b2d42;--mu:#6b6f85;--nv:#3D405B;--co:#E07A5F;--sg:#81B29A;--cr:#F4F1DE;--ye:#F2CC8F;--bd:#e6e1cf;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1d2b;--card:#262942;--tx:#eceaf4;--mu:#a5a8c0;--nv:#a9b0e8;--cr:#33365a;--bd:#3a3e63;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1b1d2b;--card:#262942;--tx:#eceaf4;--mu:#a5a8c0;--nv:#a9b0e8;--cr:#33365a;--bd:#3a3e63;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:70px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+header{position:sticky;top:0;z-index:5;background:linear-gradient(135deg,#3D405B,#5a5f8a);color:#fff;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px}
+header b{font-size:1.05rem}header small{display:block;opacity:.8;font-size:.78rem}
+main{max-width:900px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px rgba(61,64,91,.06)}
+.card h2,.card h3{margin:0 0 6px;color:var(--nv)}.mu{color:var(--mu);font-size:.9rem}
+.hero{background:linear-gradient(135deg,#3D405B,#E07A5F);color:#fff;border:0}.hero h2{color:#fff;font-size:1.35rem}.hero p{margin:6px 0 0;opacity:.95}
+.btn{display:inline-block;background:var(--co);color:#fff;border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.g{background:var(--cr);color:var(--nv)}.btn.n{background:var(--nv);color:#fff}.btn.s{background:var(--sg);color:#16352a}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.two .btn{padding:18px 8px;text-align:center;font-size:1rem}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+@media(max-width:700px){.cols{grid-template-columns:1fr}}
+input,select,textarea{width:100%;padding:11px;margin:3px 0 10px;border:1.5px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--tx);font:inherit}
+.lb{font-size:.85rem;font-weight:600;color:var(--mu)}
+.ok{background:var(--cr);color:var(--tx);border-left:4px solid var(--co);padding:10px 12px;border-radius:10px;margin:8px 0}
+.post{border-top:1px solid var(--bd);padding-top:10px;margin-top:10px}.post p{white-space:pre-wrap;margin:4px 0}
+.vid{border:0;border-radius:14px;max-width:100%}.tk{width:325px;height:580px}.yt{width:100%;aspect-ratio:16/9}.emb{width:100%;height:560px;border:0;border-radius:12px}
+.scroll{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px}.scroll>*{flex:none}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.step{background:var(--cr);border-radius:12px;padding:10px;font-size:.9rem}.step b{display:block;color:var(--nv)}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.tut{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--bd)}.av{width:54px;height:54px;border-radius:50%;background:var(--sg);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;object-fit:cover;flex:none}
+.opt{display:flex;gap:4px;flex-wrap:wrap}.opt label{flex:1;min-width:64px;text-align:center;border:1.5px solid var(--bd);border-radius:10px;padding:6px 4px;font-size:.8rem;cursor:pointer}.opt input{width:auto;margin:0 3px 0 0}
+.info{width:100%;border-radius:12px;margin-bottom:8px}
+/* chat */
+.chat{border:2px solid var(--nv);border-radius:16px;overflow:hidden;background:var(--card)}.ch{background:var(--nv);color:#fff;padding:12px 14px;font-weight:700;font-size:.92rem}.ch i{display:inline-block;width:9px;height:9px;border-radius:50%;background:#4CAF50;margin-right:6px}
+#cb{height:280px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
+.bm{background:var(--cr);padding:9px 12px;border-radius:12px 12px 12px 2px;border-left:4px solid var(--co);max-width:90%;font-size:.9rem;align-self:flex-start}.um{background:var(--nv);color:#fff;padding:8px 12px;border-radius:12px 12px 2px 12px;max-width:82%;font-size:.9rem;align-self:flex-end}
+.co{display:flex;flex-wrap:wrap;gap:6px;padding:10px;border-top:1px solid var(--bd)}.co button{background:var(--card);color:var(--nv);border:1.5px solid var(--nv);border-radius:16px;padding:5px 10px;font-size:.78rem;font-weight:700;cursor:pointer}
+.ci{display:flex;gap:6px;padding:8px;border-top:1px solid var(--bd)}.ci input{margin:0;border-radius:18px}
+/* nav */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:9;display:flex;background:var(--card);border-top:1px solid var(--bd);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+nav a{flex:1;text-align:center;text-decoration:none;color:var(--mu);font-size:.68rem;padding:4px 2px;border-radius:12px}nav a span{display:block;font-size:1.35rem;line-height:1.2}nav a.on{color:var(--co);font-weight:700;background:var(--cr)}
+/* m5 */
+.book{perspective:700px}.pg{background:var(--cr);border:2px solid var(--ye);border-radius:6px 16px 16px 6px;padding:26px 20px;min-height:140px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:1.1rem;color:var(--nv);font-style:italic;transform-origin:left center}.pg.fl{animation:fl .6s}
+@keyframes fl{from{transform:rotateY(-90deg);opacity:0}to{transform:none;opacity:1}}
+#bz{position:relative;height:270px;background:linear-gradient(#e9f3ee,#fdf0e4);border-radius:14px;overflow:hidden}
+.bb{position:absolute;width:calc(25% - 8px);aspect-ratio:1;border-radius:50%;border:0;font-size:.66rem;line-height:1.2;padding:4px;color:#2b2d42;cursor:pointer;animation:fb 3s ease-in-out infinite alternate;transition:transform .25s,opacity .25s}.bb.pop{transform:scale(1.6);opacity:0}
+@keyframes fb{from{margin-top:0}to{margin-top:-12px}}
+details{border-top:1px solid var(--bd);padding:8px 0}summary{cursor:pointer;font-weight:600}
+</style>
+</head>
+<body>
+<header><b id="ht">Chạm</b><small>Trường THPT Mộ Đức · Cùng bạn đi qua quãng đời học sinh thật tươi đẹp</small></header>
+<main id="app"></main>
+<nav id="nav"></nav>
+<script src="config.js"></script>
+<script>
+const C=window.CFG||{},$=s=>document.querySelector(s),e=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S=[],SC=null,ip=null;
+const NAV=[['home','🏠','Trang chủ'],['m2','💬','Tư vấn'],['m3','🛡️','An toàn'],['m4','🧭','Trắc nghiệm'],['m5','🤝','Không một mình']];
+const TT={home:'Trang chủ',m2:'Phòng Tư vấn trực tuyến',m3:'An toàn học đường',m4:'Trắc nghiệm tâm lý',m5:'Bạn không một mình',gv:'Quản trị'};
+const route=()=>{const r=(location.hash||'#home').slice(1);return TT[r]?r:'home'};
+/* ---------- dữ liệu Google Sheet ---------- */
+function csv(t){const r=[];let w=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}else if(c=='"')q=true;else if(c==','){w.push(f);f=''}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;w.push(f);r.push(w);w=[];f=''}else f+=c}if(f||w.length){w.push(f);r.push(w)}return r}
+const pd=s=>{s=(s||'').trim();const m=s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m)return new Date(+m[3],m[2]-1,+m[1]).getTime();const t=Date.parse(s);return isNaN(t)?0:t};
+let SS=[],SF=[];const mix=()=>{S=SF.concat(SS)};const parse=t=>{SS=csv(t).slice(1).filter(r=>r[0]&&r[1]).map((r,i)=>({sec:r[0].trim().toLowerCase(),title:r[1],body:r[2]||'',link:(r[3]||'').trim(),ts:pd(r[4]),i}));mix()};
+async function loadFS(){try{const{fs,db}=await fb();let first=1;fs.onSnapshot(fs.query(fs.collection(db,'posts'),fs.orderBy('ts','desc'),fs.limit(200)),q=>{SF=q.docs.map((d,i)=>{const x=d.data();return{sec:String(x.sec||'').toLowerCase(),title:x.title||'',body:x.body||'',link:x.link||'',ts:x.ts&&x.ts.toDate?x.ts.toDate().getTime():Date.now(),i:1e6-i}});mix();if(first){first=0;if(route()!='gv'&&document.activeElement==document.body)render()}})}catch(x){}}
+function load(){if(fbOn())loadFS();let c='';try{c=localStorage.getItem('cham2')||''}catch(x){}if(c){parse(c);render()}
+ if(C.sheetCsv)fetch(C.sheetCsv).then(r=>r.text()).then(t=>{parse(t);try{localStorage.setItem('cham2',t)}catch(x){}render()}).catch(()=>{})}
+function emb(u){if(!u)return'';let m=u.match(/tiktok\.com\/.*\/video\/(\d+)/);if(m)return`<iframe class="vid tk" src="https://www.tiktok.com/embed/v2/${m[1]}" allowfullscreen loading="lazy"></iframe>`;
+ m=u.match(/(?:youtu\.be\/|v=|shorts\/)([\w-]{11})/);if(m)return`<iframe class="vid yt" src="https://www.youtube.com/embed/${m[1]}" allowfullscreen loading="lazy"></iframe>`;
+ return/^https?:\/\//.test(u)?`<a class="btn g" href="${e(u)}" target="_blank" rel="noopener">Xem liên kết ↗</a>`:''}
+const pc=x=>`<div class="post"><b>${e(x.title)}</b>${x.ts?` <span class="mu">· ${new Date(x.ts).toLocaleDateString('vi-VN')}</span>`:''}<p>${e(x.body)}</p>${emb(x.link)}</div>`;
+const pl=(s,f)=>S.filter(x=>x.sec==s).sort((a,b)=>(b.ts-a.ts)||(b.i-a.i)).map(f||pc).join('');
+const ST=[['🔭','Biết trước'],['👀','Nhận diện sớm'],['🛠️','Xử lý đúng'],['🆘','Tìm kiếm hỗ trợ']];
+const pt=x=>{const L=x.body.split(/\n+/).filter(Boolean);return`<div class="card"><h3>🎬 ${e(x.title)}</h3>${emb(x.link)}${L.length>=4?'<div class="steps">'+ST.map((s,i)=>`<div class="step"><b>${s[0]} ${s[1]}</b>${e(L[i])}</div>`).join('')+'</div>':`<p>${e(x.body)}</p>`}</div>`};
+/* ---------- biểu mẫu ---------- */
+const FD={
+ tamsu:{t:'💌 Hộp thư tâm sự ẩn danh',code:1,f:[['khoi','Khối lớp','sel',['Khối 10','Khối 11','Khối 12']],['van_de','Vấn đề','sel',['Áp lực học tập','Mâu thuẫn bạn bè','Gia đình','Tình cảm tuổi học trò','Khác']],['noi_dung','Điều bạn muốn chia sẻ','txt']]},
+ report:{t:'🚨 Hộp thư “Cảnh báo Xanh”',f:[['loai','Loại việc','sel',['Bắt nạt / cô lập','Đánh nhau','Đe dọa, trấn lột','Bạo lực mạng','Khác']],['lop','Lớp / địa điểm (không bắt buộc)','in'],['noi_dung','Mô tả sự việc','txt']]},
+ booking:{t:'📅 Đăng ký lịch tư vấn',f:[['ho_ten','Họ tên & lớp','in'],['lien_he','Zalo / SĐT để thầy cô liên hệ','in'],['hinh_thuc','Hình thức','sel',['Gặp trực tiếp','Tư vấn online']],['noi_dung','Nội dung / thời gian mong muốn','txt']]}};
+function form(k){const E=(C.embeds||{})[k];if(E)return`<iframe class="emb" src="${e(E)}" loading="lazy"></iframe>`;
+ const F=(C.forms||{})[k];if(!F||!F.action)return'<div class="ok">Biểu mẫu chưa được cấu hình. Em hãy gặp trực tiếp thầy cô Tổ Tư vấn nhé.</div>';
+ return FD[k].f.map(f=>`<label class="lb">${f[1]}</label>`+(f[2]=='sel'?`<select id="${k}_${f[0]}">${f[3].map(o=>`<option>${o}</option>`).join('')}</select>`:f[2]=='txt'?`<textarea id="${k}_${f[0]}" rows="4"></textarea>`:`<input id="${k}_${f[0]}">`)).join('')+`<button class="btn" data-send="${k}">Gửi</button><div id="msg_${k}"></div>`}
+async function send(k){const F=C.forms[k],d=FD[k],m=$('#msg_'+k),p=new URLSearchParams();
+ if(!$('#'+k+'_noi_dung').value.trim()){m.innerHTML='<div class="ok">Bạn chưa nhập nội dung.</div>';return}
+ let code='';if(d.code){const L=()=>String.fromCharCode(65+Math.random()*26|0);code='NCT-'+(1000+Math.floor(Math.random()*9000))+L()+L()}
+ d.f.forEach(f=>{if(F.fields&&F.fields[f[0]])p.append(F.fields[f[0]],$('#'+k+'_'+f[0]).value)});if(code&&F.fields&&F.fields.ma)p.append(F.fields.ma,code);
+ m.innerHTML='<div class="ok">Đang gửi…</div>';
+ try{await fetch(F.action,{method:'POST',mode:'no-cors',body:p});d.f.forEach(f=>{if(f[2]!='sel')$('#'+k+'_'+f[0]).value=''});
+  m.innerHTML='<div class="ok">✅ Đã gửi. Cảm ơn bạn!'+(code?`<br>Mã tra cứu của bạn: <b style="font-size:1.2rem">${code}</b><br>Hãy <b>chụp màn hình / ghi lại mã</b>. Sau 12–24 giờ, nhập mã vào ô “Tra cứu phản hồi” để đọc thư trả lời.`:'')+'</div>'}
+ catch(x){m.innerHTML='<div class="ok">Gửi chưa được, bạn kiểm tra mạng và thử lại nhé.</div>'}}
+async function lookup(){const c=$('#lk').value.trim().toUpperCase(),o=$('#lkr');if(!c)return;if(!C.replyCsv){o.innerHTML='<div class="ok">Chức năng tra cứu chưa được cấu hình.</div>';return}
+ try{const t=await(await fetch(C.replyCsv,{cache:'no-store'})).text();const r=csv(t).slice(1).find(r=>(r[0]||'').trim().toUpperCase()==c);
+  o.innerHTML=r&&r[1]?`<div class="ok"><b>Thư trả lời của thầy cô${r[2]?' ('+e(r[2])+')':''}:</b><p style="white-space:pre-wrap;margin:6px 0 0">${e(r[1])}</p></div>`:'<div class="ok">Chưa có phản hồi cho mã này. Bạn quay lại sau 12–24 giờ nhé.</div>'}catch(x){o.innerHTML='<div class="ok">Không tra cứu được, vui lòng thử lại.</div>'}}
+const HOT='<div class="ok">🆘 Cần giúp ngay? Gọi <b>111</b> (Tổng đài quốc gia bảo vệ trẻ em, miễn phí 24/7) hoặc nói với thầy cô / người lớn bạn tin tưởng. Bạn không một mình.</div>';
+/* ---------- chatbot ---------- */
+const BOT={baoluc:['🚨 Mình muốn báo cáo bạo lực học đường','Nhà trường luôn bảo vệ em! Nếu em bị bắt nạt, bị cô lập hoặc bị công kích trên mạng, hãy dùng <b>Hộp thư “Cảnh báo Xanh”</b> ở mục An toàn học đường.','m3:report','Mở Cảnh báo Xanh'],
+ apluc:['📚 Mình đang áp lực điểm số và việc học','Hít một hơi thật sâu nào! Rất nhiều bạn cũng đang như em. Hãy thử <b>làm bài kiểm tra căng thẳng (DASS-21)</b> hoặc gửi tâm sự để thầy cô gỡ rối cùng em.','m4:q_dass','Làm bài DASS-21'],
+ tamsu:['💌 Mình muốn gửi tâm sự giấu tên','Tụi mình luôn lắng nghe! Hộp thư tâm sự <b>không hỏi tên hay email</b>, em sẽ nhận một mã bí mật để đọc thư trả lời.','m2:tamsu','Mở Hộp thư tâm sự'],
+ tn:['🧭 Mình muốn làm trắc nghiệm tâm lý','Tuyệt vời! Có 3 bài: căng thẳng (DASS-21), điểm mạnh tính cách và EQ, kèm lý giải và lời khuyên.','m4','Đến Trắc nghiệm'],
+ gap:['👩‍🏫 Mình muốn đặt lịch gặp thầy cô','Các thầy cô Tổ Tư vấn luôn đón chờ em! Em chọn gặp trực tiếp hoặc online ở mục Phòng Tư vấn nhé.','m2:booking','Đặt lịch hẹn']};
+const cm=(t,u)=>{const d=document.createElement('div');d.className=u?'um':'bm';d.innerHTML=t;$('#cb').appendChild(d);$('#cb').scrollTop=1e5};
+function chat(t){const b=BOT[t];cm(b[0],1);setTimeout(()=>cm(b[1]+`<br><br><a class="btn g" href="#" data-go="${b[2]}">${b[3]}</a>`),300)}
+function chatTxt(){const i=$('#cu'),m=i.value.trim();if(!m)return;cm(e(m),1);i.value='';
+ setTimeout(()=>cm(/tự tử|tự sát|muốn chết|tự làm đau|tự hại|không muốn sống/i.test(m)?'Mình rất lo cho em và mình muốn em được an toàn. Hãy nói ngay với thầy cô hoặc người lớn em tin tưởng, hoặc gọi <b>111</b> (miễn phí 24/7). Em không một mình. 💛':'Cảm ơn em đã chia sẻ! 🌿 Lưu ý: khung chat này chỉ trả lời tự động, <b>tin nhắn chưa được gửi tới thầy cô</b>. Em hãy gửi vào <a href="#" data-go="m2:tamsu">Hộp thư tâm sự</a> để nhận thư trả lời nhé.'),400)}
+/* ---------- trắc nghiệm ---------- */
+const DQ=['Tôi thấy khó thư giãn','Tôi bị khô miệng','Tôi không cảm nhận được cảm xúc tích cực nào','Tôi bị khó thở dù không gắng sức','Tôi thấy khó bắt tay vào làm việc','Tôi có xu hướng phản ứng thái quá','Tôi bị run tay chân','Tôi thấy mình tiêu hao nhiều năng lượng vì căng thẳng','Tôi lo lắng về các tình huống có thể khiến mình hoảng sợ hoặc xấu hổ','Tôi thấy mình không có gì để mong đợi','Tôi dễ bị kích động','Tôi thấy khó thư giãn được','Tôi thấy buồn chán, nản lòng','Tôi không chịu được việc bị cản trở','Tôi thấy mình gần như hoảng loạn','Tôi không thể hứng thú với bất cứ điều gì','Tôi thấy mình chẳng có giá trị gì','Tôi khá dễ phật ý, tự ái','Tôi nghe rõ tim đập dù không gắng sức','Tôi thấy sợ vô cớ','Tôi thấy cuộc sống vô nghĩa'];
+const VIA=`Sáng tạo|Tôi hay nghĩ ra cách làm mới mẻ|Ghi lại ý tưởng và thử biến nó thành một dự án nhỏ
+Tò mò|Tôi thích khám phá những điều chưa biết|Mỗi tuần đặt một câu hỏi “tại sao?” và tìm hiểu thêm
+Tư duy phản biện|Tôi cân nhắc nhiều phía trước khi kết luận|Giúp bạn bè phân tích vấn đề, nhưng cũng lắng nghe cảm xúc của họ
+Ham học hỏi|Tôi thích học điều mới dù không bị bắt buộc|Đặt mục tiêu học một kỹ năng mới mỗi tháng
+Tầm nhìn|Bạn bè hay hỏi ý kiến tôi khi cần lời khuyên|Chia sẻ góc nhìn của bạn trong nhóm học tập
+Dũng cảm|Tôi dám nói điều đúng dù người khác không đồng tình|Dùng sự dũng cảm để lên tiếng bảo vệ bạn bị bắt nạt
+Kiên trì|Tôi làm đến cùng việc đã bắt đầu dù khó|Chia mục tiêu lớn thành các bước nhỏ để đi được đường dài
+Trung thực|Tôi nói thật và sống đúng với con người mình|Giữ sự chân thành, kết hợp cách nói nhẹ nhàng
+Nhiệt huyết|Tôi tràn đầy năng lượng khi làm việc mình thích|Truyền năng lượng cho nhóm, nhớ nghỉ ngơi để không kiệt sức
+Yêu thương|Tôi quan tâm sâu sắc đến những người thân thiết|Chủ động nhắn hỏi thăm người thân mỗi tuần
+Tử tế|Tôi sẵn lòng giúp người khác mà không cần đền đáp|Tham gia hoạt động thiện nguyện của lớp, trường
+Thấu hiểu xã hội|Tôi nhận ra cảm xúc của người khác khá nhanh|Làm cầu nối khi bạn bè có mâu thuẫn
+Làm việc nhóm|Tôi thích cùng bạn bè hoàn thành mục tiêu chung|Nhận vai trò gắn kết trong các dự án nhóm
+Công bằng|Tôi đối xử công bằng với mọi người|Đề xuất cách chia việc công bằng cho cả nhóm
+Lãnh đạo|Tôi hay là người tổ chức, dẫn dắt nhóm|Lắng nghe từng thành viên để dẫn dắt hiệu quả hơn
+Biết tha thứ|Tôi dễ bỏ qua lỗi lầm của người khác|Tha thứ không có nghĩa là chấp nhận bị tổn thương lần nữa
+Khiêm tốn|Tôi không thích khoe khoang thành tích|Đừng quên ghi nhận công sức của chính mình
+Thận trọng|Tôi suy nghĩ kỹ trước khi quyết định|Lập kế hoạch học tập và quản lý thời gian
+Tự kiểm soát|Tôi kiềm chế được cảm xúc và thói quen xấu|Rủ bạn cùng xây dựng thói quen tốt
+Cảm nhận cái đẹp|Tôi dễ xúc động trước cảnh đẹp, âm nhạc, nghệ thuật|Dành thời gian cho nghệ thuật để nạp lại năng lượng
+Biết ơn|Tôi thường nhớ và nói lời cảm ơn|Viết 3 điều biết ơn mỗi tối
+Hy vọng|Tôi tin mọi chuyện rồi sẽ tốt đẹp hơn|Biến sự lạc quan thành kế hoạch hành động cụ thể
+Hài hước|Tôi thích làm mọi người cười|Dùng tiếng cười xoa dịu căng thẳng, tránh chọc đau người khác
+Ý nghĩa sống|Tôi tin cuộc sống có mục đích lớn hơn bản thân|Gắn việc học với giá trị và ước mơ của riêng bạn`.split('\n').map(x=>x.split('|'));
+const EQD=[['Tự nhận thức','Mỗi ngày dành 2 phút gọi tên cảm xúc của mình (“mình đang lo / giận / vui vì…”).'],['Tự điều chỉnh','Khi nóng giận, hãy hít thở sâu 4 nhịp và đếm đến 10 trước khi nói hay làm gì.'],['Động lực','Chia mục tiêu thành bước nhỏ và tự thưởng mỗi khi hoàn thành một bước.'],['Đồng cảm','Thử lắng nghe một người bạn trong 5 phút mà không ngắt lời, không phán xét.'],['Kỹ năng xã hội','Tập nói “mình cảm thấy… khi… vì…” để bày tỏ ý kiến nhẹ nhàng mà rõ ràng.']];
+const EQQ=['Tôi nhận ra mình đang cảm thấy gì ngay khi cảm xúc xuất hiện','Tôi biết rõ điểm mạnh và điểm yếu của bản thân','Tôi hiểu vì sao mình buồn, giận hay lo lắng','Khi tức giận, tôi bình tĩnh lại trước khi nói hay làm gì','Tôi giữ được bình tĩnh khi gặp áp lực thi cử','Tôi lấy lại tinh thần khá nhanh sau thất bại','Tôi đặt mục tiêu và nỗ lực để đạt được','Tôi không bỏ cuộc khi gặp khó khăn','Tôi tìm được niềm vui trong việc học và việc mình làm','Tôi nhận ra khi bạn bè buồn dù họ không nói','Tôi sẵn sàng lắng nghe mà không vội phán xét','Tôi đặt mình vào vị trí người khác trước khi trách họ','Tôi dễ kết bạn và giữ được tình bạn','Khi có mâu thuẫn, tôi biết cách nói chuyện để giải quyết','Tôi dám từ chối hoặc nói “không” một cách lịch sự'];
+const lvl=(v,t)=>{let k=0;t.forEach((x,i)=>{if(v>=x)k=i+1});return['Bình thường','Nhẹ','Vừa','Nặng','Rất nặng'][k]};
+const Q={
+ dass:{t:'1 · Mức độ căng thẳng học đường (DASS-21)',d:'Thang đo chuẩn gồm 21 câu, đánh giá Trầm cảm – Lo âu – Căng thẳng trong 1 tuần qua.',qs:DQ,o:['Không đúng','Đúng một phần','Khá đúng','Rất đúng'],v:0,
+  r(a){const sc=l=>l.reduce((s,n)=>s+a[n-1],0)*2,d=sc([3,5,10,13,16,17,21]),n=sc([2,4,7,9,15,19,20]),s=sc([1,6,8,11,12,14,18]);
+   const hi=[lvl(d,[10,14,21,28]),lvl(n,[8,10,15,20]),lvl(s,[15,19,26,34])].some(x=>x=='Vừa'||x=='Nặng'||x=='Rất nặng');
+   return`<b>Trầm cảm:</b> ${d} – ${lvl(d,[10,14,21,28])}<br><b>Lo âu:</b> ${n} – ${lvl(n,[8,10,15,20])}<br><b>Căng thẳng:</b> ${s} – ${lvl(s,[15,19,26,34])}<br><br><b>Lý giải:</b> điểm càng cao nghĩa là tuần qua bạn càng thường gặp các biểu hiện đó. Đây chỉ là sàng lọc tham khảo, <b>không phải chẩn đoán</b>.<br><br><b>Lời khuyên:</b> ngủ đủ giấc, vận động nhẹ mỗi ngày, chia nhỏ việc học, nói chuyện với người bạn tin tưởng. ${hi?'Mức của bạn từ “Vừa” trở lên, hãy <a href="#" data-go="m2:booking">đặt lịch gặp thầy cô Tổ Tư vấn</a> nhé.':'Hãy tiếp tục chăm sóc bản thân nhé!'}${hi||a[20]>=2?HOT:''}`}},
+ via:{t:'2 · Điểm mạnh tính cách (bản rút gọn theo 24 điểm mạnh VIA)',d:'24 câu, mỗi câu ứng với một điểm mạnh. Đây là bản rút gọn để tham khảo, không phải bài VIA Survey chính thức.',qs:VIA.map(x=>x[1]),o:['Không giống tôi','Ít giống','Khá giống','Rất giống tôi'],v:1,
+  r(a){const t=a.map((v,i)=>[v,i]).sort((x,y)=>y[0]-x[0]||x[1]-y[1]).slice(0,5);return'<b>5 điểm mạnh nổi bật của bạn:</b><br>'+t.map((x,j)=>`<p style="margin:8px 0"><b>${j+1}. ${VIA[x[1]][0]}</b><br><span class="mu">${VIA[x[1]][1].replace('Tôi','Bạn')}. Lời khuyên: ${VIA[x[1]][2]}.</span></p>`).join('')+'<b>Lý giải:</b> điểm mạnh là những phẩm chất bạn đã quen dùng. Hãy dùng chúng mỗi ngày trong học tập và quan hệ bạn bè để tự tin hơn.'}},
+ eq:{t:'3 · Trắc nghiệm EQ (trí tuệ cảm xúc)',d:'15 câu về 5 nhóm kỹ năng: tự nhận thức, tự điều chỉnh, động lực, đồng cảm, kỹ năng xã hội.',qs:EQQ,o:['Hiếm khi','Thỉnh thoảng','Thường xuyên','Luôn luôn'],v:1,
+  r(a){const g=EQD.map((d,i)=>{const m=(a[i*3]+a[i*3+1]+a[i*3+2])/3;return{n:d[0],tip:d[1],m}}),all=g.reduce((s,x)=>s+x.m,0)/5,L=m=>m>=3.3?'Tốt':m>=2.5?'Khá':'Cần rèn luyện';
+   const low=g.slice().sort((x,y)=>x.m-y.m).slice(0,2);return`<b>EQ chung: ${all.toFixed(1)}/4 – ${L(all)}</b><br>`+g.map(x=>`${x.n}: ${x.m.toFixed(1)} (${L(x.m)})`).join('<br>')+'<br><br><b>Lý giải:</b> EQ là khả năng hiểu và quản lý cảm xúc của mình và người khác, và có thể rèn luyện được.<br><br><b>Lời khuyên cho 2 nhóm cần chú ý:</b><br>'+low.map(x=>`• <b>${x.n}:</b> ${x.tip}`).join('<br>')}}};
+const quiz=id=>{const q=Q[id];return`<div class="card" id="q_${id}"><h3>${q.t}</h3><div class="mu">${q.d}</div><p><button class="btn n" data-qz="${id}">Làm bài</button></p><div id="qb_${id}" hidden>${q.qs.map((x,i)=>`<p style="margin:10px 0 4px">${i+1}. ${x}</p><div class="opt">${q.o.map((o,v)=>`<label><input type="radio" name="${id}${i}" value="${v+q.v}">${o}</label>`).join('')}</div>`).join('')}<p><button class="btn" data-qgo="${id}">Xem kết quả</button></p><div id="qr_${id}"></div></div></div>`};
+function score(id){const q=Q[id],a=[];for(let i=0;i<q.qs.length;i++){const c=document.querySelector(`input[name=${id}${i}]:checked`);if(!c){$('#qr_'+id).innerHTML=`<div class="ok">Bạn còn câu chưa trả lời (câu ${i+1}).</div>`;return}a.push(+c.value)}$('#qr_'+id).innerHTML='<div class="ok">'+q.r(a)+'</div>'}
+/* ---------- thư giãn ---------- */
+const MS=['Bạn không cần hoàn hảo, chỉ cần tiến bộ hơn hôm qua một chút.','Mệt thì nghỉ, nghỉ xong đi tiếp vẫn kịp.','Điểm số không định nghĩa giá trị của bạn.','Hôm nay bạn đã cố gắng, vậy là đủ đáng tự hào.','Một người bạn tử tế có thể thay đổi cả một ngày của ai đó. Hãy là người đó.','Sai lầm không phải kết thúc, đó là bài học.','Bạn quan trọng hơn bạn nghĩ rất nhiều.','Nói “mình cần giúp” là dấu hiệu của sự dũng cảm.','Mỗi bước nhỏ hôm nay là một con đường lớn ngày mai.','Đừng so sánh chương 1 của bạn với chương 10 của người khác.','Hít thở thật sâu. Từng việc một thôi.','Có người luôn sẵn sàng lắng nghe bạn: thầy cô, bạn bè, gia đình.','Hãy nhẹ nhàng với chính mình như cách bạn nhẹ nhàng với bạn thân.','Mưa rồi sẽ tạnh, bạn cũng sẽ qua được giai đoạn này.','Một lời cảm ơn hôm nay có thể làm ấm lòng ai đó.','Bạn không cô đơn. Có nhiều người đang cùng bạn đi qua.','Việc khó nhất là bắt đầu. Hãy làm 5 phút thôi!','Khác biệt không phải điều xấu, đó là điều làm bạn là bạn.','Nghỉ ngơi cũng là một phần của học tập.','Điều tốt đẹp đang trên đường tới với bạn.'];
+const BUB=['Sợ kiểm tra miệng','Điểm kém','Mệt mỏi','Áp lực đồng trang lứa','Bài tập chất đống','Sợ bị so sánh','Lo thi cử','Thiếu ngủ'];
+const TZ=[['Cái gì càng lấy đi càng lớn?','Cái hố.'],['Có 3 quả táo, bạn lấy đi 2 quả. Bạn có mấy quả?','2 quả, vì là những quả bạn đã lấy.'],['Tháng nào có 28 ngày?','Tất cả các tháng đều có ít nhất 28 ngày.'],['Con gì đập thì sống, không đập thì chết?','Con tim.'],['Cái gì của bạn nhưng người khác dùng nhiều hơn bạn?','Tên của bạn.'],['Trong hệ nhị phân, 1 + 1 bằng bao nhiêu?','10.']];
+function bub(){const z=$('#bz');if(!z)return;z.innerHTML='';let n=BUB.length;$('#bn').textContent='';BUB.forEach((t,i)=>{const b=document.createElement('button');b.className='bb';b.textContent=t;b.style.cssText=`left:${(i%4)*25+2}%;top:${Math.floor(i/4)*48+6}%;animation-delay:${i*.3}s;background:hsl(${i*40+150} 55% 78%)`;b.onclick=()=>{b.classList.add('pop');setTimeout(()=>b.remove(),250);if(--n==0)$('#bn').textContent='🎉 Bạn đã thổi bay hết áp lực! Hít thở sâu nào.'};z.appendChild(b)})}
+function flip(){const p=$('#pg');p.classList.remove('fl');void p.offsetWidth;p.textContent=MS[Math.random()*MS.length|0];p.classList.add('fl')}
+let ac=null;function rain(){const b=$('#rn');if(ac){ac.close();ac=null;b.textContent='▶ Bật tiếng mưa';return}ac=new(window.AudioContext||window.webkitAudioContext)();const n=ac.sampleRate*2,buf=ac.createBuffer(1,n,ac.sampleRate),d=buf.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;const s=ac.createBufferSource();s.buffer=buf;s.loop=true;const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=1400;const g=ac.createGain();g.gain.value=.22;s.connect(f);f.connect(g);g.connect(ac.destination);s.start();b.textContent='⏸ Tắt tiếng mưa'}
+/* ---------- chat Firebase ---------- */
+const fbOn=()=>!!(C.firebase&&C.firebase.apiKey);let FB=null,UN=[];
+const unsub=()=>{UN.forEach(f=>{try{f()}catch(x){}});UN=[]};
+async function fb(){if(FB)return FB;const B='https://www.gstatic.com/firebasejs/10.12.2/',[a,au,fs]=await Promise.all([import(B+'firebase-app.js'),import(B+'firebase-auth.js'),import(B+'firebase-firestore.js')]);const app=a.initializeApp(C.firebase);FB={au,fs,auth:au.getAuth(app),db:fs.getFirestore(app)};return FB}
+const cur=f=>new Promise(r=>{const u=f.au.onAuthStateChanged(f.auth,x=>{u();r(x)})});
+async function me(){const f=await fb();let u=await cur(f);if(!u)u=(await f.au.signInAnonymously(f.auth)).user;return u}
+const AB='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',gen=()=>Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>AB[b%32]).join(''),fmt=c=>'NCT-'+c.slice(0,4)+'-'+c.slice(4),norm=s=>s.toUpperCase().replace(/^NCT/,'').replace(/[^A-Z0-9]/g,'');
+const URG=/tự tử|tự sát|muốn chết|tự làm đau|tự hại|không muốn sống/i;
+const tsf=x=>x&&x.toDate?x.toDate().toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}):'';
+const mb=(ms,own)=>ms.map(m=>`<div class="${m.from==own?'um':'bm'}">${e(m.text)}<div style="font-size:.68rem;opacity:.7;margin-top:3px">${m.from=='gv'?'Thầy/cô':'Học sinh'} · ${tsf(m.at)}</div></div>`).join('');
+const BOXS='height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:10px;background:var(--bg);border-radius:12px;margin-bottom:8px';
+const er=x=>'<div class="ok">Chưa được: '+e(x.code||x.message)+'</div>';
+function csInit(){const c=localStorage.getItem('cham_code');c?csOpen(c):csStart()}
+function csStart(){const b=$('#cs');b.innerHTML=`<h3>💬 Trò chuyện riêng với thầy cô</h3><div class="mu" style="margin-bottom:8px">Ẩn danh: không cần tên, email hay tài khoản. Bạn nhận một <b>mã bí mật</b> để quay lại đọc trả lời (thầy cô thường trả lời trong 12–24 giờ).</div><label class="lb">Khối lớp</label><select id="c_k"><option>Khối 10</option><option>Khối 11</option><option>Khối 12</option></select><label class="lb">Vấn đề</label><select id="c_v">${FD.tamsu.f[1][3].map(o=>`<option>${o}</option>`).join('')}</select><label class="lb">Điều bạn muốn chia sẻ</label><textarea id="c_t" rows="4"></textarea><button class="btn" id="c_go">Gửi &amp; bắt đầu</button><div id="c_m"></div><hr style="border:0;border-top:1px solid var(--bd);margin:14px 0"><label class="lb">Đã có mã? Nhập để mở lại</label><input id="c_c" placeholder="NCT-XXXX-XXXX"><button class="btn g" id="c_op">Mở</button>${HOT}`;
+ $('#c_go').onclick=async()=>{const t=$('#c_t').value.trim(),m=$('#c_m');if(!t){m.innerHTML='<div class="ok">Bạn chưa nhập nội dung.</div>';return}m.innerHTML='<div class="ok">Đang gửi…</div>';
+  try{const u=await me(),{fs,db}=await fb(),code=gen(),ug=URG.test(t),st=fs.serverTimestamp(),bt=fs.writeBatch(db);
+   bt.set(fs.doc(db,'threads',code),{khoi:$('#c_k').value,van_de:$('#c_v').value,createdAt:st,lastAt:st,lastFrom:'hs',status:'open',urgent:ug});
+   bt.set(fs.doc(fs.collection(db,'threads',code,'messages')),{from:'hs',text:t,at:st,uid:u.uid});await bt.commit();localStorage.setItem('cham_code',code);csOpen(code,ug)}catch(x){m.innerHTML=er(x)}};
+ $('#c_op').onclick=()=>{const c=norm($('#c_c').value);if(c.length==8)csOpen(c);else $('#c_m').innerHTML='<div class="ok">Mã gồm 8 ký tự, ví dụ NCT-AB3D-7KQ2.</div>'}}
+async function csOpen(code,ug){const b=$('#cs');b.innerHTML='<div class="mu">Đang kết nối…</div>';
+ try{const u=await me(),{fs,db}=await fb(),s=await fs.getDoc(fs.doc(db,'threads',code));
+  if(!s.exists()){localStorage.removeItem('cham_code');csStart();$('#c_m').innerHTML='<div class="ok">Mã không đúng hoặc đã bị xóa.</div>';return}
+  localStorage.setItem('cham_code',code);
+  b.innerHTML=`<h3>💬 Trò chuyện với thầy cô</h3><div class="ok">Mã bí mật của bạn: <b style="font-size:1.15rem">${fmt(code)}</b><br>Hãy <b>chụp màn hình / ghi lại mã</b> để mở lại trên máy khác. Không chia sẻ mã cho ai.</div>${ug?HOT:''}<div id="cm" style="${BOXS}"></div><textarea id="c_t" rows="2" placeholder="Nhắn thêm cho thầy cô…"></textarea><button class="btn" id="c_s">Gửi</button> <button class="btn g" id="c_x">Thoát</button><div id="c_m"></div>`;
+  UN.push(fs.onSnapshot(fs.query(fs.collection(db,'threads',code,'messages'),fs.orderBy('at')),q=>{const el=$('#cm');if(!el)return;el.innerHTML=mb(q.docs.map(d=>d.data()),'hs')||'<div class="mu">Chưa có tin nhắn.</div>';el.scrollTop=1e5},x=>{$('#c_m').innerHTML=er(x)}));
+  $('#c_x').onclick=()=>{localStorage.removeItem('cham_code');unsub();csStart()};
+  $('#c_s').onclick=async()=>{const t=$('#c_t').value.trim();if(!t)return;$('#c_t').value='';const ug2=URG.test(t),st=fs.serverTimestamp(),bt=fs.writeBatch(db),up={lastAt:st,lastFrom:'hs',status:'open'};if(ug2)up.urgent=true;
+   bt.set(fs.doc(fs.collection(db,'threads',code,'messages')),{from:'hs',text:t,at:st,uid:u.uid});bt.update(fs.doc(db,'threads',code),up);
+   try{await bt.commit();$('#c_m').innerHTML=ug2?HOT:''}catch(x){$('#c_m').innerHTML=er(x)}}}catch(x){b.innerHTML=er(x)}}
+async function gvInit(){const b=$('#gv');if(!fbOn()){b.innerHTML='<div class="ok">Chưa cấu hình Firebase trong config.js.</div>';return}
+ try{const f=await fb(),{au,auth}=f;UN.push(au.onAuthStateChanged(auth,u=>{if(!u||u.isAnonymous){b.innerHTML='<h3>🔐 Đăng nhập giáo viên</h3><p class="mu">Dùng tài khoản Google đã được nhà trường cấp quyền.</p><button class="btn n" id="g_in">Đăng nhập bằng Google</button><div id="g_m"></div>';$('#g_in').onclick=()=>au.signInWithPopup(auth,new au.GoogleAuthProvider()).catch(x=>{$('#g_m').innerHTML=er(x)})}else gvList(u)}))}catch(x){b.innerHTML=er(x)}}
+function gvList(u){const b=$('#gv'),{au,fs,auth,db}=FB;b.innerHTML=`${gvHead(u)}<h3>📬 Hộp thư tư vấn</h3><div id="g_l"><div class="mu">Đang tải…</div></div>`;
+ gvBind(u);
+ UN.push(fs.onSnapshot(fs.query(fs.collection(db,'threads'),fs.orderBy('lastAt','desc'),fs.limit(100)),q=>{const l=$('#g_l');if(!l)return;
+  l.innerHTML=q.docs.map(d=>{const t=d.data(),w=t.lastFrom=='hs'&&t.status!='done';return`<div class="post" style="cursor:pointer" data-th="${d.id}"><b>${fmt(d.id)}</b> · ${e(t.khoi)} · ${e(t.van_de)} ${t.urgent?'⚠️ <b style="color:var(--co)">KHẨN</b>':''}<br>${w?'🔴 Chờ trả lời':t.status=='done'?'✔ Đã xử lý':'🟢 Đã trả lời'} <span class="mu">· ${tsf(t.lastAt)}</span></div>`}).join('')||'<div class="mu">Chưa có tin nhắn nào.</div>';
+  l.querySelectorAll('[data-th]').forEach(x=>x.onclick=()=>gvOpen(x.dataset.th,u))},x=>{$('#g_l').innerHTML='<div class="ok">Tài khoản này chưa được cấp quyền ('+e(x.code)+'). Hãy nhờ quản trị thêm email của bạn vào quy tắc Firestore.</div>'}))}
+const gvHead=u=>`<div class="mu">${e(u.email)} · <a href="#" id="g_out">Đăng xuất</a></div><div class="two" style="margin:10px 0"><button class="btn n" id="t_in" style="padding:10px">📬 Hộp thư</button><button class="btn g" id="t_po" style="padding:10px">📝 Đăng bài</button></div>`;
+function gvBind(u){const{au,auth}=FB;$('#g_out').onclick=ev=>{ev.preventDefault();au.signOut(auth).then(()=>{unsub();gvInit()})};$('#t_in').onclick=()=>{unsub();gvList(u)};$('#t_po').onclick=()=>{unsub();gvPost(u)}}
+const PS=[['tb','📢 Thông báo (Trang chủ)'],['2','💬 Thông báo Phòng Tư vấn'],['3.2','🧰 Cẩm nang an toàn / quy tắc'],['3.3','🎬 Video tình huống (KHÔNG MỘT MÌNH)']];
+function gvPost(u){const b=$('#gv'),{fs,db}=FB;let eid=null;
+ b.innerHTML=gvHead(u)+`<h3>📝 Đăng bài</h3><label class="lb">Chuyên mục</label><select id="p_s">${PS.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('')}</select><label class="lb">Tiêu đề</label><input id="p_t" maxlength="200"><label class="lb" id="p_h">Nội dung</label><textarea id="p_b" rows="5" maxlength="5000"></textarea><label class="lb">Liên kết video/bài viết (TikTok, YouTube, Facebook – không bắt buộc)</label><input id="p_l" placeholder="https://…"><button class="btn" id="p_go">Đăng bài</button> <button class="btn g" id="p_c" hidden>Hủy sửa</button><div id="p_m"></div><h3 style="margin-top:16px">Bài đã đăng</h3><div id="p_ls"></div>`;
+ gvBind(u);
+ const hint=()=>{$('#p_h').textContent=$('#p_s').value=='3.3'?'Nội dung: ghi 4 dòng theo thứ tự – Biết trước / Nhận diện sớm / Xử lý đúng / Tìm kiếm hỗ trợ':'Nội dung'};$('#p_s').onchange=hint;
+ const reset=()=>{eid=null;$('#p_t').value=$('#p_b').value=$('#p_l').value='';$('#p_go').textContent='Đăng bài';$('#p_c').hidden=true};$('#p_c').onclick=reset;
+ $('#p_go').onclick=async()=>{const t=$('#p_t').value.trim();if(!t){$('#p_m').innerHTML='<div class="ok">Bạn chưa nhập tiêu đề.</div>';return}
+  const d={sec:$('#p_s').value,title:t,body:$('#p_b').value,link:$('#p_l').value.trim()};
+  try{if(eid)await fs.updateDoc(fs.doc(db,'posts',eid),d);else await fs.addDoc(fs.collection(db,'posts'),{...d,ts:fs.serverTimestamp()});$('#p_m').innerHTML='<div class="ok">✅ Đã lưu. Học sinh sẽ thấy khi mở lại trang.</div>';reset()}
+  catch(x){$('#p_m').innerHTML=x.code=='permission-denied'?'<div class="ok">Tài khoản này chưa có quyền đăng bài. Hãy nhờ quản trị thêm email vào quy tắc Firestore.</div>':er(x)}};
+ UN.push(fs.onSnapshot(fs.query(fs.collection(db,'posts'),fs.orderBy('ts','desc'),fs.limit(100)),q=>{const l=$('#p_ls');if(!l)return;
+  l.innerHTML=q.docs.map(d=>{const x=d.data();return`<div class="post"><b>${e(x.title)}</b> <span class="mu">· ${(PS.find(p=>p[0]==x.sec)||[0,x.sec])[1]} · ${tsf(x.ts)}</span><br><button class="btn g" data-ed="${d.id}" style="padding:6px 12px">Sửa</button> <button class="btn g" data-dl="${d.id}" style="padding:6px 12px">Xóa</button></div>`}).join('')||'<div class="mu">Chưa có bài nào.</div>';
+  l.querySelectorAll('[data-ed]').forEach(x=>x.onclick=()=>{const dd=q.docs.find(y=>y.id==x.dataset.ed).data();eid=x.dataset.ed;$('#p_s').value=dd.sec;hint();$('#p_t').value=dd.title;$('#p_b').value=dd.body||'';$('#p_l').value=dd.link||'';$('#p_go').textContent='Cập nhật';$('#p_c').hidden=false;scrollTo(0,0)});
+  l.querySelectorAll('[data-dl]').forEach(x=>x.onclick=()=>{if(confirm('Xóa bài này?'))fs.deleteDoc(fs.doc(db,'posts',x.dataset.dl)).catch(y=>{$('#p_m').innerHTML=er(y)})})},x=>{$('#p_ls').innerHTML=er(x)}))}
+function gvOpen(id,u){unsub();const b=$('#gv'),{fs,db}=FB;b.innerHTML=`<p><a href="#" id="g_b">← Danh sách</a></p><h3>${fmt(id)}</h3><div id="g_i" class="mu"></div><div id="cm" style="${BOXS}"></div><textarea id="g_t" rows="3" placeholder="Viết thư trả lời…"></textarea><button class="btn" id="g_s">Gửi</button> <button class="btn g" id="g_d">Đánh dấu đã xử lý</button><div id="g_m"></div>`;
+ const tr=fs.doc(db,'threads',id);
+ UN.push(fs.onSnapshot(tr,s=>{const t=s.data()||{};$('#g_i').textContent=(t.khoi||'')+' · '+(t.van_de||'')+(t.urgent?' · ⚠️ KHẨN':'');const d=$('#g_d');if(d){d.textContent=t.status=='done'?'Mở lại':'Đánh dấu đã xử lý';d.onclick=()=>fs.updateDoc(tr,{status:t.status=='done'?'open':'done'})}}));
+ UN.push(fs.onSnapshot(fs.query(fs.collection(db,'threads',id,'messages'),fs.orderBy('at')),q=>{const el=$('#cm');if(!el)return;el.innerHTML=mb(q.docs.map(d=>d.data()),'gv');el.scrollTop=1e5}));
+ $('#g_b').onclick=ev=>{ev.preventDefault();unsub();gvList(u)};
+ $('#g_s').onclick=async()=>{const t=$('#g_t').value.trim();if(!t)return;const st=fs.serverTimestamp(),bt=fs.writeBatch(db);bt.set(fs.doc(fs.collection(db,'threads',id,'messages')),{from:'gv',text:t,at:st,uid:u.uid});bt.update(tr,{lastAt:st,lastFrom:'gv'});
+  try{await bt.commit();$('#g_t').value=''}catch(x){$('#g_m').innerHTML=er(x)}}}
+/* ---------- các trang ---------- */
+const soc=()=>(C.facebook?`<a class="btn g" href="${e(C.facebook)}" target="_blank" rel="noopener">Facebook “Trạm Chạm”</a> `:'')+(C.tiktok?`<a class="btn g" href="${e(C.tiktok)}" target="_blank" rel="noopener">TikTok “Chạm”</a>`:'');
+const P={
+home:()=>`<div class="card hero"><h2>🌿 Chạm</h2><p>Tư vấn tâm lý học đường là hoạt động hỗ trợ sức khỏe tinh thần cho học sinh qua lắng nghe, trò chuyện và tư vấn, giúp giải quyết khó khăn trong học tập, tình cảm và cuộc sống.</p><p><b>“Chạm” – cùng bạn đi qua quãng đời học sinh thật tươi đẹp!</b></p></div>
+<div class="two"><a class="btn" href="#" data-go="m3:report">🚨 Báo cáo bạo lực ẩn danh</a><a class="btn n" href="#" data-go="m2:booking">📅 Đặt lịch tư vấn tâm lý</a></div>
+${S.some(x=>x.sec=='tb')?`<div class="card"><h3>📢 Thông báo</h3>${pl('tb')}</div>`:''}
+<div class="card"><h3>🤖 Trợ lý tư vấn 24/7</h3><div class="chat"><div class="ch"><i></i>TRỢ LÝ TƯ VẤN HỌC ĐƯỜNG</div><div id="cb"><div class="bm">Chào em! 🌿 Đây là trợ lý trả lời tự động của Trường THPT Mộ Đức. Em không cần nhập tên hay email. Hôm nay em cần hỗ trợ về điều gì?</div></div><div class="co"><button data-bot="baoluc">🚨 Báo cáo bạo lực</button><button data-bot="apluc">📚 Áp lực học tập</button><button data-bot="tamsu">💌 Tâm sự ẩn danh</button><button data-bot="tn">🧭 Trắc nghiệm</button><button data-bot="gap">👩‍🏫 Gặp thầy cô</button></div><div class="ci"><input id="cu" placeholder="Nhập câu hỏi của em…"><button class="btn" data-chat>Gửi</button></div></div></div>
+<div class="card"><h3>🎬 Góc truyền thông</h3>${(C.tiktokVideos||[]).length?`<div class="scroll">${C.tiktokVideos.map(emb).join('')}</div>`:'<div class="mu">Video từ kênh TikTok “Chạm” sẽ hiện ở đây.</div>'}<p>${soc()}</p></div>
+<div class="card"><h3>📲 Cài app lên điện thoại</h3><div class="mu"><b>Android (Chrome):</b> ⋮ → “Thêm vào màn hình chính”.<br><b>iPhone (Safari):</b> nút Chia sẻ ⬆️ → “Thêm vào MH chính”.</div><div id="inst">${ip?'<p><button class="btn" data-inst>Cài đặt ngay</button></p>':''}</div></div>`,
+m2:()=>`<div class="cols"><div>${fbOn()?'<div class="card" id="cs"></div>':`<div class="card" id="tamsu"><h3>${FD.tamsu.t}</h3><div class="mu" style="margin-bottom:8px">Không cần tên hay email. Sau khi gửi bạn nhận một <b>mã bí mật</b> để đọc thư trả lời.</div>${form('tamsu')}</div>
+<div class="card"><h3>🔎 Tra cứu phản hồi</h3><div class="mu">Nhập mã bí mật (ví dụ NCT-8392AB) sau 12–24 giờ.</div><input id="lk" placeholder="NCT-…" style="margin-top:8px"><button class="btn s" data-lk>Tra cứu</button><div id="lkr"></div></div>`}
+${(C.embeds||{}).padlet?`<div class="card"><h3>🧱 Bức tường tâm sự &amp; chữa lành</h3><iframe class="emb" src="${e(C.embeds.padlet)}" loading="lazy"></iframe></div>`:''}</div>
+<div><div class="card"><h3>👩‍🏫 Tổ Tư vấn</h3>${(C.tutors||[]).map(t=>`<div class="tut">${t.anh?`<img class="av" src="${e(t.anh)}" alt="">`:`<div class="av">${e((t.ten||'?').trim().split(' ').pop()[0])}</div>`}<div><b>${e(t.ten)}</b><div class="mu">${e(t.vai||'')}</div></div></div>`).join('')||'<div class="mu">Danh sách thầy cô Tổ Tư vấn (cấu hình trong config.js).</div>'}<p style="margin-top:12px"><button class="btn n" data-bk="Gặp trực tiếp">Đăng ký gặp trực tiếp</button> <button class="btn g" data-bk="Tư vấn online">Tư vấn online</button></p></div>
+<div class="card" id="booking"><h3>${FD.booking.t}</h3>${form('booking')}</div>${pl('2')?`<div class="card"><h3>Thông báo</h3>${pl('2')}</div>`:''}<p class="mu" style="text-align:center"><a href="#gv">🔐 Quản trị / Giáo viên</a></p></div></div>`,
+gv:()=>'<div class="card" id="gv"></div>',
+m3:()=>`<div class="card" id="report"><h3>${FD.report.t}</h3><div class="mu" style="margin-bottom:8px">Báo cáo ngầm các vụ bắt nạt, cô lập, đánh nhau hoặc bạo lực mạng, gửi tới Ban Giám hiệu và Tổ Tư vấn. Bạn không cần ghi tên.</div>${form('report')}${HOT}</div>
+<div class="card"><h3>🧰 Cẩm nang xử lý nhanh</h3>${(C.infographics||[]).map(u=>`<img class="info" src="${e(u)}" alt="Infographic" loading="lazy">`).join('')}<div class="steps"><div class="step"><b>1 · Giữ bình tĩnh</b>Không đáp trả bằng bạo lực hay lời lẽ xúc phạm.</div><div class="step"><b>2 · Lưu bằng chứng</b>Chụp màn hình tin nhắn, bài đăng; ghi lại thời gian, địa điểm.</div><div class="step"><b>3 · Nói với người lớn tin cậy</b>GVCN, Tổ Tư vấn, phụ huynh.</div><div class="step"><b>4 · Tìm hỗ trợ</b>Gửi Cảnh báo Xanh hoặc gọi 111.</div></div>
+<h3 style="margin-top:14px">Quy tắc ứng xử văn minh</h3><div class="mu">• Tôn trọng thầy cô, bạn bè và sự khác biệt.<br>• Không bình luận, chia sẻ, chế ảnh xúc phạm người khác.<br>• Không tung tin đồn, không tẩy chay bạn.<br>• Nghĩ kỹ trước khi đăng; không chia sẻ thông tin riêng tư của người khác.<br>• Thấy bạn bị bắt nạt: đứng về phía bạn và báo người lớn.</div>${pl('3.2')}</div>
+<div class="card hero"><h2>KHÔNG MỘT MÌNH</h2><p>Biết trước · Nhận diện sớm · Xử lý đúng · Tìm kiếm hỗ trợ</p></div>
+${pl('3.3',pt)||'<div class="card mu">Video tình huống do học sinh thể hiện (bắt nạt, tung tin đồn…) và cách xử lý từng tình huống sẽ được đăng ở đây.</div>'}`,
+m4:()=>`<div class="ok" style="margin-top:0">Các bài trắc nghiệm chỉ mang tính tham khảo, kết quả không được lưu lại.</div>${quiz('dass')}${quiz('via')}${quiz('eq')}`,
+m5:()=>`<div class="card"><h3>📖 Lật trang sách mỗi ngày</h3><div class="mu" style="margin-bottom:8px">Mở một trang bất kỳ để nhận thông điệp dành cho bạn.</div><div class="book"><div class="pg" id="pg">Bấm “Lật trang” nhé 🌿</div></div><p><button class="btn" data-flip>📖 Lật trang</button></p></div>
+<div class="card"><h3>🫧 Thổi bay áp lực</h3><div class="mu" style="margin-bottom:8px">Chạm vào từng bong bóng để làm nổ chúng.</div><div id="bz"></div><p id="bn" style="color:var(--nv);font-weight:700"></p><button class="btn g" data-bub>Chơi lại</button></div>
+<div class="card"><h3>🎧 Góc âm thanh chữa lành</h3>${C.music?emb(C.music):''}<p><button class="btn s" id="rn" data-rain>▶ Bật tiếng mưa</button></p></div>
+<div class="card"><h3>🧠 Đố vui rèn tư duy</h3>${TZ.map(t=>`<details><summary>${t[0]}</summary><div class="mu">👉 ${t[1]}</div></details>`).join('')}</div>`};
+function render(){unsub();const r=route();$('#ht').textContent=TT[r];$('#nav').innerHTML=NAV.map(n=>`<a href="#${n[0]}" class="${n[0]==r?'on':''}"><span>${n[1]}</span>${n[2]}</a>`).join('');$('#app').innerHTML=P[r]();
+ if(r=='m5')bub();if(r=='m2'&&fbOn()&&$('#cs'))csInit();if(r=='gv')gvInit();if(SC&&SC.startsWith('q_')){const b=$('#qb_'+SC.slice(2));if(b)b.hidden=false}if(SC){const el=document.getElementById(SC);SC=null;if(el)setTimeout(()=>el.scrollIntoView({behavior:'smooth'}),50)}}
+function go(t){const[r,a]=t.split(':');if(a)SC=a;if(route()==r){render()}else location.hash=r}
+document.addEventListener('click',ev=>{const t=ev.target.closest('[data-go],[data-send],[data-bot],[data-chat],[data-qz],[data-qgo],[data-lk],[data-bk],[data-flip],[data-bub],[data-rain],[data-inst]');if(!t)return;const d=t.dataset;
+ if('go' in d){ev.preventDefault();go(d.go);}
+ else if('send' in d)send(d.send);else if('bot' in d)chat(d.bot);else if('chat' in d)chatTxt();
+ else if('qz' in d)$('#qb_'+d.qz).hidden=!$('#qb_'+d.qz).hidden;else if('qgo' in d)score(d.qgo);
+ else if('lk' in d)lookup();else if('bk' in d){const x=document.getElementById('booking_hinh_thuc');if(x)x.value=d.bk;SC='booking';document.getElementById('booking').scrollIntoView({behavior:'smooth'})}
+ else if('flip' in d)flip();else if('bub' in d)bub();else if('rain' in d)rain();else if('inst' in d)ip.prompt()});
+document.addEventListener('keydown',ev=>{if(ev.key=='Enter'&&ev.target.id=='cu')chatTxt()});
+window.addEventListener('beforeinstallprompt',ev=>{ev.preventDefault();ip=ev;if(route()=='home')render()});
+window.addEventListener('hashchange',()=>{render();if(!SC)scrollTo(0,0)});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+render();load();
+</script>
+</body>
+</html>
