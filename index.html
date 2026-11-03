@@ -361,7 +361,7 @@ render();load();
 <!-- SCRIPT 2: XỬ LÝ FIREBASE -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyB_kb029r3o2CG4NTtEtUitlFay@NE7b1E",
@@ -375,11 +375,38 @@ render();load();
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const messengerRef = collection(db, "Messenger");
 
+    // Lắng nghe tin nhắn theo thời gian thực từ Firebase
+    const q = query(messengerRef, orderBy("timestamp", "asc"));
+    onSnapshot(q, (snapshot) => {
+        const chatContent = document.getElementById("chat-content");
+        chatContent.innerHTML = `<p style="margin: 0 0 10px 0;"><b>Trợ lý:</b> Chào em! Em cần hỗ trợ hay tâm sự điều gì hôm nay?</p>`;
+        
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.noiDung) {
+                chatContent.innerHTML += `
+                    <div style="margin: 8px 0; text-align: right;">
+                        <span style="background: #E07A5F; color: white; padding: 6px 10px; border-radius: 10px; display: inline-block; max-width: 80%; text-align: left;">${data.noiDung}</span>
+                    </div>`;
+            }
+            if (data.traLoiGV) {
+                chatContent.innerHTML += `
+                    <div style="margin: 8px 0; text-align: left;">
+                        <span style="background: #3D405B; color: white; padding: 6px 10px; border-radius: 10px; display: inline-block; max-width: 80%;">
+                            <b>Thầy/Cô:</b> ${data.traLoiGV}
+                        </span>
+                    </div>`;
+            }
+        });
+        chatContent.scrollTop = chatContent.scrollHeight;
+    });
+
+    // Hàm gửi tin nhắn của Học sinh
     window.guiTinNhan = async function() {
         const inputElement = document.getElementById("messageInput");
         const statusElement = document.getElementById("status");
-        const chatContent = document.getElementById("chat-content");
         const noiDung = inputElement.value.trim();
 
         if (!noiDung) {
@@ -388,19 +415,15 @@ render();load();
         }
 
         try {
-            // Gửi dữ liệu lên Firestore
-            await setDoc(doc(db, "Messenger", "Cham"), {
-                Chạm: noiDung,
-                thoiGian: new Date().toLocaleString()
-            }, { merge: true });
+            await addDoc(messengerRef, {
+                noiDung: noiDung,
+                traLoiGV: "",
+                trangThai: "chua_tra_loi",
+                timestamp: serverTimestamp()
+            });
 
             statusElement.style.color = "green";
-            statusElement.innerText = "Đã gửi!";
-            
-            // Hiện ngay tin nhắn vừa gửi lên ô chat
-            chatContent.innerHTML += `<div style="margin-top: 8px; text-align: right;"><span style="background: #E07A5F; color: white; padding: 6px 10px; border-radius: 10px; display: inline-block; max-width: 80%;">${noiDung}</span></div>`;
-            chatContent.scrollTop = chatContent.scrollHeight;
-            
+            statusElement.innerText = "Đã gửi tới thầy cô!";
             inputElement.value = "";
         } catch (e) {
             console.error("Lỗi khi gửi: ", e);
