@@ -269,6 +269,50 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 render();load();
 </script>
 </body>
+ <!-- NÚT BẤM BẬT/TẮT KHUNG CHAT (NỔI Ở GÓC DƯỚI BÊN PHẢI) -->
+<div id="chat-widget-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: sans-serif;">
+    
+    <!-- Nút tròn mở khung chat -->
+    <button id="chat-toggle-btn" onclick="toggleChatBox()" style="width: 60px; height: 60px; border-radius: 50%; background: #4f46e5; color: white; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+        💬
+    </button>
+
+    <!-- Hộp thoại chat (Ẩn mặc định, bấm vào nút tròn thì hiện lên) -->
+    <div id="chat-box" style="display: none; position: absolute; bottom: 75px; right: 0; width: 320px; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); border: 1px solid #e5e7eb; overflow: hidden;">
+        
+        <!-- Tiêu đề hộp chat -->
+        <div style="background: #4f46e5; color: white; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+            <span>Hỗ trợ trực tuyến - Chạm</span>
+            <button onclick="toggleChatBox()" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer;">✕</button>
+        </div>
+
+        <!-- Khu vực hiển thị nội dung chat -->
+        <div id="chat-content" style="padding: 15px; height: 200px; overflow-y: auto; background: #f9fafb; font-size: 0.9rem; color: #374151;">
+            <p><b>Trợ lý:</b> Chào em! Em cần hỗ trợ gì hôm nay?</p>
+        </div>
+
+        <!-- Khu vực nhập tin nhắn -->
+        <div style="padding: 10px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; background: white;">
+            <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." style="flex: 1; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; outline: none; font-size: 0.9rem;">
+            <button onclick="guiTinNhan()" style="padding: 8px 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Gửi</button>
+        </div>
+        
+        <!-- Thông báo trạng thái nhỏ -->
+        <div id="status" style="padding: 4px 10px; font-size: 0.75rem; color: green; background: white; text-align: right;"></div>
+    </div>
+</div>
+
+<!-- SCRIPT ĐIỀU KHIỂN ĐÓNG/MỞ KHUNG CHAT -->
+<script>
+    function toggleChatBox() {
+        const chatBox = document.getElementById("chat-box");
+        if (chatBox.style.display === "none" || chatBox.style.display === "") {
+            chatBox.style.display = "block";
+        } else {
+            chatBox.style.display = "none";
+        }
+    }
+</script>
  <script type="module">
     // Import Firebase từ CDN
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
