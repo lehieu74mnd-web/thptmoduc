@@ -59,7 +59,17 @@ details{border-top:1px solid var(--bd);padding:8px 0}summary{cursor:pointer;font
 </head>
 <body>
 <header><b id="ht">Chạm</b><small>Trường THPT Mộ Đức · Cùng bạn đi qua quãng đời học sinh thật tươi đẹp</small><nav id="nav"></nav></header>
-<main id="app"></main>
+<main id="app">
+ <!-- Thêm đoạn này vào bên trong thẻ <main> -->
+<div class="card" style="margin-top: 20px; padding: 15px;">
+    <h3>Gửi tin nhắn lên Firebase</h3>
+    <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <input type="text" id="messageInput" placeholder="Nhập nội dung tin nhắn..." style="flex: 1; padding: 8px; border: 1px solid var(--bd); border-radius: 8px;">
+        <button onclick="guiTinNhan()" class="btn" style="cursor: pointer;">Gửi</button>
+    </div>
+    <p id="status" style="margin-top: 8px; font-size: 0.9rem; color: green;"></p>
+</div>
+</main>
 <script src="config.js"></script>
 <script>
 const C=window.CFG||{},$=s=>document.querySelector(s),e=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -259,4 +269,51 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 render();load();
 </script>
 </body>
+ <script type="module">
+    // Import Firebase từ CDN
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    // Cấu hình Firebase của dự án Chammoduc 
+    // (Bạn thay thế các giá trị bên dưới bằng thông số thực tế trong Project Settings trên Firebase Console nhé)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "chammoduc.firebaseapp.com",
+      projectId: "chammoduc",
+      storageBucket: "chammoduc.appspot.com",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Khởi tạo Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Hàm xử lý khi bấm nút Gửi
+    window.guiTinNhan = async function() {
+        const inputElement = document.getElementById("messageInput");
+        const statusElement = document.getElementById("status");
+        const noiDung = inputElement.value.trim();
+
+        if (!noiDung) {
+            alert("Vui lòng nhập nội dung tin nhắn!");
+            return;
+        }
+
+        try {
+            // Ghi dữ liệu vào Document "Cham" trong Collection "Messenger"
+            await setDoc(doc(db, "Messenger", "Cham"), {
+                Chạm: noiDung,
+                thoiGian: new Date().toLocaleString()
+            }, { merge: true }); // Giữ lại dữ liệu cũ, chỉ cập nhật trường mới
+
+            statusElement.innerText = "Đã gửi thành công lên Firebase!";
+            inputElement.value = "";
+        } catch (e) {
+            console.error("Lỗi khi gửi: ", e);
+            statusElement.style.color = "red";
+            statusElement.innerText = "Gửi thất bại, hãy kiểm tra lại Console.";
+        }
+    };
+</script>
 </html>
