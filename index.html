@@ -313,45 +313,73 @@ render();load();
         }
     }
 </script>
- <script type="module">
-    // Import Firebase từ CDN
+<!-- KHUNG CHAT NỔI Ở GÓC DƯỚI BÊN PHẢI -->
+<div id="chat-widget-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: sans-serif;">
+    
+    <!-- Nút tròn mở/đóng khung chat -->
+    <button id="chat-toggle-btn" onclick="toggleChatBox()" style="width: 60px; height: 60px; border-radius: 50%; background: #3D405B; color: white; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+        💬
+    </button>
+
+    <!-- Hộp thoại chat -->
+    <div id="chat-box" style="display: none; position: absolute; bottom: 75px; right: 0; width: 320px; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); border: 1px solid #e5e7eb; overflow: hidden;">
+        
+        <!-- Tiêu đề hộp chat -->
+        <div style="background: #3D405B; color: white; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+            <span>Chạm - Tư vấn học đường</span>
+            <button onclick="toggleChatBox()" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer;">✕</button>
+        </div>
+
+        <!-- Khu vực hiển thị tin nhắn -->
+        <div id="chat-content" style="padding: 15px; height: 220px; overflow-y: auto; background: #faf7ee; font-size: 0.9rem; color: #2b2d42;">
+            <p style="margin: 0 0 10px 0;"><b>Trợ lý:</b> Chào em! Em cần hỗ trợ hay tâm sự điều gì hôm nay?</p>
+        </div>
+
+        <!-- Khu vực nhập tin nhắn -->
+        <div style="padding: 10px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; background: white;">
+            <input type="text" id="messageInput" placeholder="Nhập tin nhắn của em..." style="flex: 1; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; outline: none; font-size: 0.9rem;">
+            <button onclick="guiTinNhan()" style="padding: 8px 14px; background: #E07A5F; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Gửi</button>
+        </div>
+        
+        <!-- Trạng thái -->
+        <div id="status" style="padding: 4px 10px; font-size: 0.75rem; color: green; background: white; text-align: right;"></div>
+    </div>
+</div>
+
+<!-- SCRIPT 1: ĐÓNG / MỞ NỔI -->
+<script>
+    function toggleChatBox() {
+        const chatBox = document.getElementById("chat-box");
+        if (chatBox.style.display === "none" || chatBox.style.display === "") {
+            chatBox.style.display = "block";
+        } else {
+            chatBox.style.display = "none";
+        }
+    }
+</script>
+
+<!-- SCRIPT 2: XỬ LÝ FIREBASE -->
+<script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
     import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-    // Cấu hình Firebase của dự án Chammoduc 
-    // (Bạn thay thế các giá trị bên dưới bằng thông số thực tế trong Project Settings trên Firebase Console nhé)
     const firebaseConfig = {
-      // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyB_kbO29r3o2CG4NTtEtUItlFay0NE7b1E",
-  authDomain: "chammoduc.firebaseapp.com",
-  projectId: "chammoduc",
-  storageBucket: "chammoduc.firebasestorage.app",
-  messagingSenderId: "255177066276",
-  appId: "1:255177066276:web:bcefd1a2c161f9e8ab95b1",
-  measurementId: "G-D3681Y2KSW"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+      apiKey: "AIzaSyB_kb029r3o2CG4NTtEtUitlFay@NE7b1E",
+      authDomain: "chammoduc.firebaseapp.com",
+      projectId: "chammoduc",
+      storageBucket: "chammoduc.firebasestorage.app",
+      messagingSenderId: "255177066276",
+      appId: "1:255177066276:web:bcefd1a2c161f9e8ab95b1",
+      measurementId: "G-D3681Y2KSW"
     };
 
-    // Khởi tạo Firebase
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Hàm xử lý khi bấm nút Gửi
     window.guiTinNhan = async function() {
         const inputElement = document.getElementById("messageInput");
         const statusElement = document.getElementById("status");
+        const chatContent = document.getElementById("chat-content");
         const noiDung = inputElement.value.trim();
 
         if (!noiDung) {
@@ -360,18 +388,24 @@ const analytics = getAnalytics(app);
         }
 
         try {
-            // Ghi dữ liệu vào Document "Cham" trong Collection "Messenger"
+            // Gửi dữ liệu lên Firestore
             await setDoc(doc(db, "Messenger", "Cham"), {
                 Chạm: noiDung,
                 thoiGian: new Date().toLocaleString()
-            }, { merge: true }); // Giữ lại dữ liệu cũ, chỉ cập nhật trường mới
+            }, { merge: true });
 
-            statusElement.innerText = "Đã gửi thành công lên Firebase!";
+            statusElement.style.color = "green";
+            statusElement.innerText = "Đã gửi!";
+            
+            // Hiện ngay tin nhắn vừa gửi lên ô chat
+            chatContent.innerHTML += `<div style="margin-top: 8px; text-align: right;"><span style="background: #E07A5F; color: white; padding: 6px 10px; border-radius: 10px; display: inline-block; max-width: 80%;">${noiDung}</span></div>`;
+            chatContent.scrollTop = chatContent.scrollHeight;
+            
             inputElement.value = "";
         } catch (e) {
             console.error("Lỗi khi gửi: ", e);
             statusElement.style.color = "red";
-            statusElement.innerText = "Gửi thất bại, hãy kiểm tra lại Console.";
+            statusElement.innerText = "Gửi thất bại!";
         }
     };
 </script>
