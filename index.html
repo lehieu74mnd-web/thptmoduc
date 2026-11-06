@@ -59,17 +59,7 @@ details{border-top:1px solid var(--bd);padding:8px 0}summary{cursor:pointer;font
 </head>
 <body>
 <header><b id="ht">Chạm</b><small>Trường THPT Mộ Đức · Cùng bạn đi qua quãng đời học sinh thật tươi đẹp</small><nav id="nav"></nav></header>
-<main id="app">
- <!-- Thêm đoạn này vào bên trong thẻ <main> -->
-<div class="card" style="margin-top: 20px; padding: 15px;">
-    <h3>Gửi tin nhắn lên Firebase</h3>
-    <div style="display: flex; gap: 10px; margin-top: 10px;">
-        <input type="text" id="messageInput" placeholder="Nhập nội dung tin nhắn..." style="flex: 1; padding: 8px; border: 1px solid var(--bd); border-radius: 8px;">
-        <button onclick="guiTinNhan()" class="btn" style="cursor: pointer;">Gửi</button>
-    </div>
-    <p id="status" style="margin-top: 8px; font-size: 0.9rem; color: green;"></p>
-</div>
-</main>
+<main id="app"></main>
 <script src="config.js"></script>
 <script>
 const C=window.CFG||{},$=s=>document.querySelector(s),e=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -177,6 +167,12 @@ const cur=f=>new Promise(r=>{const u=f.au.onAuthStateChanged(f.auth,x=>{u();r(x)
 async function me(){const f=await fb();let u=await cur(f);if(!u)u=(await f.au.signInAnonymously(f.auth)).user;return u}
 const AB='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',gen=()=>Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>AB[b%32]).join(''),fmt=c=>'NCT-'+c.slice(0,4)+'-'+c.slice(4),norm=s=>s.toUpperCase().replace(/^NCT/,'').replace(/[^A-Z0-9]/g,'');
 const URG=/tự tử|tự sát|muốn chết|tự làm đau|tự hại|không muốn sống/i;
+/* báo email cho giáo viên qua Google Form (không gửi nội dung tâm sự) */
+function notify(code,ug,kind){const N=C.notify;if(!N)return;const T=(ug&&N.urgent&&N.urgent.action)?N.urgent:N;if(!T.action)return;
+ try{const k='cham_nt_'+code,now=Date.now();let last=0;try{last=+localStorage.getItem(k)||0}catch(x){}
+  if(!ug&&now-last<6e5)return;try{localStorage.setItem(k,now)}catch(x){}
+  const p=new URLSearchParams(),F=T.fields||{};if(F.loai)p.append(F.loai,kind);if(F.ma)p.append(F.ma,code.slice(-4));if(F.khan)p.append(F.khan,ug?'CÓ – cần xem ngay':'Không');
+  fetch(T.action,{method:'POST',mode:'no-cors',body:p}).catch(()=>{})}catch(x){}}
 const tsf=x=>x&&x.toDate?x.toDate().toLocaleString('vi-VN',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'}):'';
 const mb=(ms,own)=>ms.map(m=>`<div class="${m.from==own?'um':'bm'}">${e(m.text)}<div style="font-size:.68rem;opacity:.7;margin-top:3px">${m.from=='gv'?'Thầy/cô':'Học sinh'} · ${tsf(m.at)}</div></div>`).join('');
 const BOXS='height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:10px;background:var(--bg);border-radius:12px;margin-bottom:8px';
@@ -186,7 +182,7 @@ function csStart(){const b=$('#cs');b.innerHTML=`<h3>💬 Trò chuyện riêng v
  $('#c_go').onclick=async()=>{const t=$('#c_t').value.trim(),m=$('#c_m');if(!t){m.innerHTML='<div class="ok">Bạn chưa nhập nội dung.</div>';return}m.innerHTML='<div class="ok">Đang gửi…</div>';
   try{const u=await me(),{fs,db}=await fb(),code=gen(),ug=URG.test(t),st=fs.serverTimestamp(),bt=fs.writeBatch(db);
    bt.set(fs.doc(db,'threads',code),{khoi:$('#c_k').value,van_de:$('#c_v').value,createdAt:st,lastAt:st,lastFrom:'hs',status:'open',urgent:ug});
-   bt.set(fs.doc(fs.collection(db,'threads',code,'messages')),{from:'hs',text:t,at:st,uid:u.uid});await bt.commit();localStorage.setItem('cham_code',code);csOpen(code,ug)}catch(x){m.innerHTML=er(x)}};
+   bt.set(fs.doc(fs.collection(db,'threads',code,'messages')),{from:'hs',text:t,at:st,uid:u.uid});await bt.commit();localStorage.setItem('cham_code',code);notify(code,ug,'Tin mới');csOpen(code,ug)}catch(x){m.innerHTML=er(x)}};
  $('#c_op').onclick=()=>{const c=norm($('#c_c').value);if(c.length==8)csOpen(c);else $('#c_m').innerHTML='<div class="ok">Mã gồm 8 ký tự, ví dụ NCT-AB3D-7KQ2.</div>'}}
 async function csOpen(code,ug){const b=$('#cs');b.innerHTML='<div class="mu">Đang kết nối…</div>';
  try{const u=await me(),{fs,db}=await fb(),s=await fs.getDoc(fs.doc(db,'threads',code));
@@ -197,9 +193,16 @@ async function csOpen(code,ug){const b=$('#cs');b.innerHTML='<div class="mu">Đa
   $('#c_x').onclick=()=>{localStorage.removeItem('cham_code');unsub();csStart()};
   $('#c_s').onclick=async()=>{const t=$('#c_t').value.trim();if(!t)return;$('#c_t').value='';const ug2=URG.test(t),st=fs.serverTimestamp(),bt=fs.writeBatch(db),up={lastAt:st,lastFrom:'hs',status:'open'};if(ug2)up.urgent=true;
    bt.set(fs.doc(fs.collection(db,'threads',code,'messages')),{from:'hs',text:t,at:st,uid:u.uid});bt.update(fs.doc(db,'threads',code),up);
-   try{await bt.commit();$('#c_m').innerHTML=ug2?HOT:''}catch(x){$('#c_m').innerHTML=er(x)}}}catch(x){b.innerHTML=er(x)}}
+   try{await bt.commit();notify(code,ug2,'Nhắn thêm');$('#c_m').innerHTML=ug2?HOT:''}catch(x){$('#c_m').innerHTML=er(x)}}}catch(x){b.innerHTML=er(x)}}
 async function gvInit(){const b=$('#gv');if(!fbOn()){b.innerHTML='<div class="ok">Chưa cấu hình Firebase trong config.js.</div>';return}
- try{const f=await fb(),{au,auth}=f;UN.push(au.onAuthStateChanged(auth,u=>{if(!u||u.isAnonymous){b.innerHTML='<h3>🔐 Đăng nhập giáo viên</h3><p class="mu">Dùng tài khoản Google đã được nhà trường cấp quyền.</p><button class="btn n" id="g_in">Đăng nhập bằng Google</button><div id="g_m"></div>';$('#g_in').onclick=()=>au.signInWithPopup(auth,new au.GoogleAuthProvider()).catch(x=>{$('#g_m').innerHTML=er(x)})}else gvList(u)}))}catch(x){b.innerHTML=er(x)}}
+ try{const f=await fb(),{au,auth}=f;UN.push(au.onAuthStateChanged(auth,u=>{if(!u||u.isAnonymous){if($('#g_in'))return;b.innerHTML='<h3>🔐 Đăng nhập quản trị / giáo viên</h3><p class="mu">Dùng tài khoản Google đã được nhà trường cấp quyền.</p><button class="btn n" id="g_in">Đăng nhập bằng Google</button> <button class="btn g" id="g_dg">🔧 Kiểm tra kết nối</button><div id="g_m"></div>';$('#g_in').onclick=()=>au.signInWithPopup(auth,new au.GoogleAuthProvider()).catch(x=>{$('#g_m').innerHTML=er(x)});$('#g_dg').onclick=diag}else gvList(u)}))}catch(x){b.innerHTML=er(x)}}
+async function diag(){const o=$('#g_m'),L=[],add=(ok,t)=>{L.push((ok?'✅ ':'❌ ')+t);o.innerHTML='<div class="ok">'+L.join('<br>')+'</div>'};
+ add(fbOn(),'Đã điền cấu hình Firebase (apiKey) trong config.js');if(!fbOn())return;
+ const K=C.firebase;add(!!(K.authDomain&&K.projectId&&K.appId),'Có đủ authDomain, projectId, appId');
+ try{await fb();add(true,'Tải được thư viện Firebase')}catch(x){add(false,'Không tải được Firebase: '+e(x.message));return}
+ try{await me();add(true,'Đăng nhập ẩn danh (cho học sinh) hoạt động')}catch(x){const c=x.code||'';add(false,'Đăng nhập ẩn danh lỗi ('+e(c)+'): '+(/api-key/.test(c)?'apiKey sai, hãy copy lại từ Firebase.':/operation-not-allowed|admin-restricted/.test(c)?'chưa bật “Vô danh/Anonymous” trong Authentication.':'kiểm tra lại cấu hình.'));return}
+ try{const{fs,db}=FB;await fs.getDocs(fs.query(fs.collection(db,'posts'),fs.limit(1)));add(true,'Đọc được bài đăng (Firestore và quy tắc đã sẵn sàng)')}catch(x){add(false,'Đọc bài lỗi ('+e(x.code||x.message)+'): '+(x.code=='permission-denied'?'chưa dán và Xuất bản quy tắc Firestore.':'kiểm tra đã tạo Firestore chưa.'));return}
+ add(true,'Tiếp theo: bấm “Đăng nhập bằng Google” bằng email đã khai trong admin() của quy tắc, rồi vào tab Đăng bài.')}
 function gvList(u){const b=$('#gv'),{au,fs,auth,db}=FB;b.innerHTML=`${gvHead(u)}<h3>📬 Hộp thư tư vấn</h3><div id="g_l"><div class="mu">Đang tải…</div></div>`;
  gvBind(u);
  UN.push(fs.onSnapshot(fs.query(fs.collection(db,'threads'),fs.orderBy('lastAt','desc'),fs.limit(100)),q=>{const l=$('#g_l');if(!l)return;
@@ -269,167 +272,4 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 render();load();
 </script>
 </body>
- <!-- NÚT BẤM BẬT/TẮT KHUNG CHAT (NỔI Ở GÓC DƯỚI BÊN PHẢI) -->
-<div id="chat-widget-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: sans-serif;">
-    
-    <!-- Nút tròn mở khung chat -->
-    <button id="chat-toggle-btn" onclick="toggleChatBox()" style="width: 60px; height: 60px; border-radius: 50%; background: #4f46e5; color: white; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px;">
-        💬
-    </button>
-
-    <!-- Hộp thoại chat (Ẩn mặc định, bấm vào nút tròn thì hiện lên) -->
-    <div id="chat-box" style="display: none; position: absolute; bottom: 75px; right: 0; width: 320px; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); border: 1px solid #e5e7eb; overflow: hidden;">
-        
-        <!-- Tiêu đề hộp chat -->
-        <div style="background: #4f46e5; color: white; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span>Hỗ trợ trực tuyến - Chạm</span>
-            <button onclick="toggleChatBox()" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer;">✕</button>
-        </div>
-
-        <!-- Khu vực hiển thị nội dung chat -->
-        <div id="chat-content" style="padding: 15px; height: 200px; overflow-y: auto; background: #f9fafb; font-size: 0.9rem; color: #374151;">
-            <p><b>Trợ lý:</b> Chào em! Em cần hỗ trợ gì hôm nay?</p>
-        </div>
-
-        <!-- Khu vực nhập tin nhắn -->
-        <div style="padding: 10px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; background: white;">
-            <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." style="flex: 1; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; outline: none; font-size: 0.9rem;">
-            <button onclick="guiTinNhan()" style="padding: 8px 12px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Gửi</button>
-        </div>
-        
-        <!-- Thông báo trạng thái nhỏ -->
-        <div id="status" style="padding: 4px 10px; font-size: 0.75rem; color: green; background: white; text-align: right;"></div>
-    </div>
-</div>
-
-<!-- SCRIPT ĐIỀU KHIỂN ĐÓNG/MỞ KHUNG CHAT -->
-<script>
-    function toggleChatBox() {
-        const chatBox = document.getElementById("chat-box");
-        if (chatBox.style.display === "none" || chatBox.style.display === "") {
-            chatBox.style.display = "block";
-        } else {
-            chatBox.style.display = "none";
-        }
-    }
-</script>
-<!-- KHUNG CHAT NỔI Ở GÓC DƯỚI BÊN PHẢI -->
-<div id="chat-widget-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: sans-serif;">
-    
-    <!-- Nút tròn mở/đóng khung chat -->
-    <button id="chat-toggle-btn" onclick="toggleChatBox()" style="width: 60px; height: 60px; border-radius: 50%; background: #3D405B; color: white; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px;">
-        💬
-    </button>
-
-    <!-- Hộp thoại chat -->
-    <div id="chat-box" style="display: none; position: absolute; bottom: 75px; right: 0; width: 320px; background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.2); border: 1px solid #e5e7eb; overflow: hidden;">
-        
-        <!-- Tiêu đề hộp chat -->
-        <div style="background: #3D405B; color: white; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-            <span>Chạm - Tư vấn học đường</span>
-            <button onclick="toggleChatBox()" style="background: none; border: none; color: white; font-size: 16px; cursor: pointer;">✕</button>
-        </div>
-
-        <!-- Khu vực hiển thị tin nhắn -->
-        <div id="chat-content" style="padding: 15px; height: 220px; overflow-y: auto; background: #faf7ee; font-size: 0.9rem; color: #2b2d42;">
-            <p style="margin: 0 0 10px 0;"><b>Trợ lý:</b> Chào em! Em cần hỗ trợ hay tâm sự điều gì hôm nay?</p>
-        </div>
-
-        <!-- Khu vực nhập tin nhắn -->
-        <div style="padding: 10px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; background: white;">
-            <input type="text" id="messageInput" placeholder="Nhập tin nhắn của em..." style="flex: 1; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; outline: none; font-size: 0.9rem;">
-            <button onclick="guiTinNhan()" style="padding: 8px 14px; background: #E07A5F; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Gửi</button>
-        </div>
-        
-        <!-- Trạng thái -->
-        <div id="status" style="padding: 4px 10px; font-size: 0.75rem; color: green; background: white; text-align: right;"></div>
-    </div>
-</div>
-
-<!-- SCRIPT 1: ĐÓNG / MỞ NỔI -->
-<script>
-    function toggleChatBox() {
-        const chatBox = document.getElementById("chat-box");
-        if (chatBox.style.display === "none" || chatBox.style.display === "") {
-            chatBox.style.display = "block";
-        } else {
-            chatBox.style.display = "none";
-        }
-    }
-</script>
-
-<!-- SCRIPT 2: XỬ LÝ FIREBASE -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyB_kb029r3o2CG4NTtEtUitlFay@NE7b1E",
-      authDomain: "chammoduc.firebaseapp.com",
-      projectId: "chammoduc",
-      storageBucket: "chammoduc.firebasestorage.app",
-      messagingSenderId: "255177066276",
-      appId: "1:255177066276:web:bcefd1a2c161f9e8ab95b1",
-      measurementId: "G-D3681Y2KSW"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const messengerRef = collection(db, "Messenger");
-
-    // Lắng nghe tin nhắn theo thời gian thực từ Firebase
-    const q = query(messengerRef, orderBy("timestamp", "asc"));
-    onSnapshot(q, (snapshot) => {
-        const chatContent = document.getElementById("chat-content");
-        chatContent.innerHTML = `<p style="margin: 0 0 10px 0;"><b>Trợ lý:</b> Chào em! Em cần hỗ trợ hay tâm sự điều gì hôm nay?</p>`;
-        
-        snapshot.forEach((doc) => {
-            const data = doc.data();
-            if (data.noiDung) {
-                chatContent.innerHTML += `
-                    <div style="margin: 8px 0; text-align: right;">
-                        <span style="background: #E07A5F; color: white; padding: 6px 10px; border-radius: 10px; display: inline-block; max-width: 80%; text-align: left;">${data.noiDung}</span>
-                    </div>`;
-            }
-            if (data.traLoiGV) {
-                chatContent.innerHTML += `
-                    <div style="margin: 8px 0; text-align: left;">
-                        <span style="background: #3D405B; color: white; padding: 6px 10px; border-radius: 10px; display: inline-block; max-width: 80%;">
-                            <b>Thầy/Cô:</b> ${data.traLoiGV}
-                        </span>
-                    </div>`;
-            }
-        });
-        chatContent.scrollTop = chatContent.scrollHeight;
-    });
-
-    // Hàm gửi tin nhắn của Học sinh
-    window.guiTinNhan = async function() {
-        const inputElement = document.getElementById("messageInput");
-        const statusElement = document.getElementById("status");
-        const noiDung = inputElement.value.trim();
-
-        if (!noiDung) {
-            alert("Vui lòng nhập nội dung tin nhắn!");
-            return;
-        }
-
-        try {
-            await addDoc(messengerRef, {
-                noiDung: noiDung,
-                traLoiGV: "",
-                trangThai: "chua_tra_loi",
-                timestamp: serverTimestamp()
-            });
-
-            statusElement.style.color = "green";
-            statusElement.innerText = "Đã gửi tới thầy cô!";
-            inputElement.value = "";
-        } catch (e) {
-            console.error("Lỗi khi gửi: ", e);
-            statusElement.style.color = "red";
-            statusElement.innerText = "Gửi thất bại!";
-        }
-    };
-</script>
 </html>

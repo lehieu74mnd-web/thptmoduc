@@ -30,7 +30,14 @@ window.CFG = {
   music: "",
 
   // Chat Firebase (xem HUONG-DAN-FIREBASE.md). Để trống thì dùng hộp thư Google Form như cũ.
-     firebase: { apiKey: "...", authDomain: "chammoduc.firebaseapp.com", projectId: "chammoduc", appId: "1:255177066276:web:bcefd1a2c161f9e8ab95b1" },
+  firebase: { apiKey: "", authDomain: "", projectId: "", appId: "" },
+
+  // Báo email cho giáo viên khi có tin mới (qua Google Form, KHÔNG gửi nội dung tâm sự).
+  // fields: mã entry.xxxx của 3 câu hỏi trong form báo tin. 'urgent' (tùy chọn) = form riêng cho tin KHẨN.
+  notify: {
+    action: "", fields: { loai: "", ma: "", khan: "" },
+    urgent: { action: "", fields: { loai: "", ma: "", khan: "" } }
+  },
 
   facebook: "",
   tiktok: ""
