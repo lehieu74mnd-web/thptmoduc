@@ -1,22 +1,14 @@
-/*
- * CẤU HÌNH KẾT NỐI FIREBASE
- * ------------------------------------------------------------------
- * Khi còn để trống (apiKey: ""), website chạy ở CHẾ ĐỘ THỬ NGHIỆM:
- * dữ liệu chỉ lưu trong trình duyệt của từng máy.
- *
- * Để dùng thật: làm theo file HUONG_DAN.md, rồi dán đoạn firebaseConfig
- * lấy từ Firebase Console vào bên dưới.
- */
 window.CHAM_CONFIG = {
   firebase: {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: "",
+    apiKey: "AIzaSyB_kbO29r3o2CG4NTtEtUItlFay0NE7b1E",
+    authDomain: "chammoduc.firebaseapp.com",
+    projectId: "chammoduc",
+    storageBucket: "chammoduc.firebasestorage.app",
+    messagingSenderId: "255177066276",
+    appId: "1:255177066276:web:bcefd1a2c161f9e8ab95b1",
+    measurementId: "G-D3681Y2KSW",
   },
 
-  // Email của quản trị viên chính (phải giống email trong file firestore.rules)
-  ownerEmail: "",
+  // Email của quản trị viên chính
+  ownerEmail: "lehieu74mnd@gmail.com",
 };
