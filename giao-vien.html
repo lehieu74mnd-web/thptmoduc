@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Khu vực giáo viên – Chạm THPT Mộ Đức</title>
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;1,600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/teacher.css">
+</head>
+<body class="t-body">
+
+<!-- Đăng nhập -->
+<section id="login-view" class="login" hidden>
+  <form class="login-card" id="login-form" novalidate>
+    <img src="img/logo.svg" alt="" width="56" height="56">
+    <span class="eyebrow">Trường THPT Mộ Đức · Dự án Chạm</span>
+    <h1>Khu vực giáo viên</h1>
+    <p class="muted">Đăng nhập để đăng bài viết và trả lời tin nhắn của học sinh.</p>
+    <div id="demo-note" class="notice warn" hidden></div>
+    <div class="field"><label for="l-user">Email</label><input class="input" id="l-user" type="email" autocomplete="username" autocapitalize="off" required></div>
+    <div class="field"><label for="l-pass">Mật khẩu</label><input class="input" id="l-pass" type="password" autocomplete="current-password" required></div>
+    <div id="l-err" class="notice danger" hidden></div>
+    <button class="btn" type="submit" id="l-submit">Đăng nhập</button>
+    <button class="linklike" type="button" id="forgot">Quên mật khẩu?</button>
+    <a href="index.html" class="muted" style="font-size:14px">← Về trang chủ website</a>
+  </form>
+</section>
+
+<!-- Ứng dụng -->
+<div id="app-view" hidden>
+  <header class="t-top">
+    <div class="t-top-in">
+      <a class="t-brand" href="index.html" target="_blank" rel="noopener"><img src="img/logo.svg" alt="" width="34" height="34"><span><b>Chạm</b> · Khu vực giáo viên</span></a>
+      <nav class="t-tabs" id="tabs">
+        <a href="#hop-thu" data-tab="hop-thu">Hộp thư <span class="badge" id="tab-badge" hidden>0</span></a>
+        <a href="#bai-viet" data-tab="bai-viet">Bài viết</a>
+        <a href="#cai-dat" data-tab="cai-dat" id="tab-settings">Cài đặt trang</a>
+        <a href="#tai-khoan" data-tab="tai-khoan">Tài khoản</a>
+      </nav>
+      <div class="t-user"><span id="who"></span><button class="btn small ghost" id="logout" type="button">Đăng xuất</button></div>
+    </div>
+  </header>
+  <div id="must-change" class="t-banner" hidden>Thầy cô đang dùng mật khẩu tạm. Vui lòng <a href="#tai-khoan">đổi mật khẩu</a> trước khi sử dụng.</div>
+  <main id="t-main" class="t-main"></main>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+<script src="js/config.js"></script>
+<script src="js/meta.js"></script>
+<script src="js/seed.js"></script>
+<script src="js/store.js"></script>
+<script src="js/common.js"></script>
+<script src="js/teacher.js"></script>
+</body>
+</html>
